@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
+// biome-ignore lint/style/noNonNullAssertion: <explanation>
 const JWT_SECRET = process.env.JWT_SECRET!;
 
 export function middleware(req: NextRequest) {
