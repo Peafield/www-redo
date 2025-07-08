@@ -1,6 +1,6 @@
 import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Metadata } from "next";
-import { Lato, Playfair_Display } from "next/font/google";
+import { Newsreader, Playfair_Display } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 
@@ -10,11 +10,10 @@ const playfair_display = Playfair_Display({
 	variable: "--font-playfair-display",
 });
 
-const lato = Lato({
+const newsreader = Newsreader({
 	subsets: ["latin"],
 	display: "swap",
-	variable: "--font-lato",
-	weight: ["400", "700"],
+	variable: "--font-newsreader",
 });
 
 export const metadata: Metadata = {
@@ -34,9 +33,9 @@ export default function RootLayout({
 	return (
 		<html
 			lang="en"
-			className={`${playfair_display.variable} ${lato.variable} h-full scroll-smooth`}
+			className={`${playfair_display.variable} ${newsreader.variable} h-full scroll-smooth`}
 		>
-			<body className="min-h-screen mx-auto flex flex-col justify-between antialiased transition-colors duration-300 ease-in-out">
+			<body className="min-h-screen flex flex-col mx-auto antialiased transition-colors duration-300 ease-in-out">
 				<Navbar />
 				<main className="flex-1 flex items-center justify-between mx-auto w-full p-8">
 					{children}

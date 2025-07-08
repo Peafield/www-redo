@@ -5,6 +5,7 @@
     --color-shady-character: oklch(0.4091 0 0);
     --color-classy-mauve: oklch(0.719 0.0493 336.3);
     --font-display: var(--font-playfair-display);
+    --font-serif: var(--font-newsreader)
 }
 
 @layer base {

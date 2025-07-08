@@ -41,47 +41,54 @@ export default function Navbar({ className }: NavbarProps) {
 			)}
 		>
 			<div className="container flex items-center justify-between mx-auto w-full max-w-3xl">
-				<div className="flex-1 sm:hidden">
-					{isMenuOpen ? (
-						<ul className="flex items-center justify-around">
-							{navLinks.map((link) => (
-								<li key={link.name}>
-									<Link
-										href={link.url}
-										onClick={handleToggleMenu}
-										className="text-shady-character text-lg font-display transform transition-colors duration-200 ease-in hover:text-classy-mauve"
-									>
-										{link.name}
-									</Link>
-								</li>
-							))}
-						</ul>
-					) : (
-						<h1 className="text-center text-xl">
-							Wendi's Worminghall Whimsies
-						</h1>
-					)}
+				<div className="relative flex-1 flex items-center justify-center sm:hidden">
+					<ul
+						className={cn(
+							"absolute flex items-center justify-around w-full transition-opacity duration-300 ease-in-out",
+							{
+								"opacity-100": isMenuOpen,
+								"opacity-0 pointer-events-none": !isMenuOpen,
+							},
+						)}
+					>
+						{navLinks.map((link) => (
+							<li key={link.name}>
+								<Link
+									href={link.url}
+									onClick={handleToggleMenu}
+									className="text-shady-character text-lg font-display transform transition-colors duration-200 ease-in hover:text-classy-mauve"
+								>
+									{link.name}
+								</Link>
+							</li>
+						))}
+					</ul>
+
+					<h1
+						className={cn(
+							"text-center text-xl transition-opacity duration-300 ease-in-out",
+							{
+								"opacity-0 pointer-events-none": isMenuOpen,
+								"opacity-100": !isMenuOpen,
+							},
+						)}
+					>
+						Wendi's Worminghall Whimsies
+					</h1>
 				</div>
 
 				<h1 className="hidden sm:block sm:text-xl">
 					Wendi's Worminghall Whimsies
 				</h1>
-
 				<ul className="flex items-center justify-end">
 					<li>
 						<button
 							type="button"
-							className={cn(
-								"sm:hidden h-6 w-6 text-shady-character cursor-pointer transform transition-all duration-500 ease-in hover:text-classy-mauve",
-								{
-									"rotate-0": isMenuOpen,
-									"rotate-180": !isMenuOpen,
-								},
-							)}
+							className="sm:hidden h-6 w-6 text-shady-character cursor-pointer flex items-center justify-center"
 							onClick={handleToggleMenu}
 							aria-label="Toggle menu"
 						>
-							{!isMenuOpen ? <MenuIcon /> : <CloseIcon />}
+							{isMenuOpen ? <CloseIcon /> : <MenuIcon />}
 						</button>
 					</li>
 					{navLinks.map((link) => (
