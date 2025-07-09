@@ -1,8 +1,12 @@
-import { useCallback, useEffect, useState } from "react";
-import type { Post } from "@/types/posts";
+"use client";
 
-export default function useGetPosts() {
-	const [postData, setPostData] = useState<Post[] | null>(null);
+import { useCallback, useEffect, useState } from "react";
+import type { fetchLatestPostsReponse } from "@/types/posts";
+
+export default function useGetLatestPosts() {
+	const [postData, setPostData] = useState<fetchLatestPostsReponse | null>(
+		null,
+	);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<Error | null>(null);
 

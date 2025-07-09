@@ -1,4 +1,8 @@
+"use client";
+
+import useGetLatestPosts from "@/Hooks/useGetLatestPosts";
 import { cn } from "@/utils/cn";
+import HomeBottomNav from "../navigation/HomeBottomNav";
 import HomeLatest from "./HomeLastest";
 import { HomeRecentCarousel } from "./HomeRecentCarousel";
 
@@ -6,26 +10,34 @@ type HomeProps = {
 	className?: string;
 };
 
-const testPost = {
-	title: "My Last Living Son",
-	src: "/placeholder.png",
-	preview:
-		"Lorem ipsum ullamco ad est anim do dolor velit. Irure aliquip sit nulla ut culpa. Fugiat laborum nisi non reprehenderit magna pariatur et excepteur esse...",
-};
-
 export default function Home({ className }: HomeProps) {
+	const { postData, loading, error } = useGetLatestPosts();
+	if (loading) {
+		return <h1>Loading...</h1>;
+	}
+
+	if (error) {
+		return <h1>Error: {error.message}</h1>;
+	}
+
+	if (!postData) {
+		return <h1>No posts found.</h1>;
+	}
 	return (
-		<section
-			className={cn("flex flex-col gap-4 w-full h-full", {
-				[className as string]: !!className,
-			})}
-		>
-			<HomeLatest
-				title={testPost.title}
-				src={testPost.src}
-				preview={testPost.preview}
-			/>
-			<HomeRecentCarousel />
-		</section>
+		postData && (
+			<section
+				className={cn("flex flex-col gap-4 w-full", {
+					[className as string]: !!className,
+				})}
+			>
+				<HomeLatest
+					title={postData?.latest?.title}
+					src={postData?.latest?.image_url}
+					preview={postData?.latest?.preview_text}
+				/>
+				<HomeRecentCarousel recentPostsData={postData?.recents} />
+				<HomeBottomNav />
+			</section>
+		)
 	);
 }

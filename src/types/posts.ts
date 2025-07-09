@@ -49,3 +49,8 @@ export type PostUpdate = z.infer<typeof PostUpdateSchema>;
 
 // Post array schema
 export const PostArraySchema = z.array(PostSchema);
+
+export type fetchLatestPostsReponse = {
+	latest: Post;
+	recents: Post[];
+};

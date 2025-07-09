@@ -1,40 +1,14 @@
 import { ObjectId } from "mongodb";
 import { type NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { fetchLatestPosts } from "@/app/actions/fetchLatestPosts";
 import clientPromise from "@/lib/mongodb";
-import {
-	type Post,
-	PostArraySchema,
-	PostInsertSchema,
-	PostSchema,
-} from "@/types/posts";
+import { type Post, PostInsertSchema, PostSchema } from "@/types/posts";
 
 export async function GET() {
 	try {
-		// Connect to the MongoDB client
-		const client = await clientPromise;
-		const db = client.db(process.env.MONGO_DB_NAME);
-
-		// Fetch all posts
-		const posts = await db.collection<Post>("posts").find().toArray();
-
-		// Convert ObjectId to string
-		const formattedPosts = posts.map((post) => ({
-			...post,
-			_id: post._id.toString(),
-		}));
-
-		// Sort posts by date (most recent first)
-		const sortedPosts = formattedPosts.sort(
-			(a, b) =>
-				new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
-		);
-
-		// Validate data using Zod schema
-		const validatedData = PostArraySchema.parse(sortedPosts);
-
-		// Return the validated data
-		return NextResponse.json(validatedData, {
+		const postData = await fetchLatestPosts();
+		return NextResponse.json(postData, {
 			status: 200,
 			headers: {
 				"Cache-Control": "no-store, must-revalidate",

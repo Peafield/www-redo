@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useRef, useState } from "react";
 import { useClickAway } from "react-use";
 import { cn } from "@/utils/cn";
-import CloseIcon from "./svgs/CloseIcon";
-import MenuIcon from "./svgs/MenuIcon";
+import CloseIcon from "../svgs/CloseIcon";
+import MenuIcon from "../svgs/MenuIcon";
 
 type NavbarProps = {
 	className?: string;

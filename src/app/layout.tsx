@@ -1,8 +1,9 @@
 import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Metadata } from "next";
 import { Newsreader, Playfair_Display } from "next/font/google";
-import Navbar from "@/components/Navbar";
 import "./globals.css";
+import Footer from "@/components/navigation/Footer";
+import Navbar from "@/components/navigation/Navbar";
 
 const playfair_display = Playfair_Display({
 	subsets: ["latin"],
@@ -37,9 +38,10 @@ export default function RootLayout({
 		>
 			<body className="min-h-screen flex flex-col mx-auto antialiased transition-colors duration-300 ease-in-out">
 				<Navbar />
-				<main className="flex-1 flex items-center justify-between mx-auto w-full p-8">
+				<main className="flex-1 container max-w-6xl mx-auto w-full p-8">
 					{children}
 				</main>
+				<Footer />
 			</body>
 			<GoogleAnalytics gaId="G-DR6G4WVQ0J" />
 		</html>

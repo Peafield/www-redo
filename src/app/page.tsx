@@ -1,9 +1,15 @@
+import { Suspense } from "react";
 import Home from "@/components/home/Home";
 
 export default function HomePage() {
 	return (
-		<section className="container mx-auto min-h-screen max-w-6xl">
+		<Suspense fallback={<div>Loading...</div>}>
 			<Home />
-		</section>
+		</Suspense>
 	);
 }
+
+export const metadata = {
+	title: "Wendi's Worminghall Whimsies Home Page",
+	description: "The latest poems by Wendi Coles",
+};
