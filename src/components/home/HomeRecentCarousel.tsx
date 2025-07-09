@@ -21,7 +21,7 @@ export function HomeRecentCarousel({
 					return (
 						<div
 							key={post._id as string}
-							className="relative flex-shrink-0 w-48 flex-col gap-2"
+							className="relative flex-shrink-0 w-48 sm:w-1/2 flex-col"
 						>
 							<div className="relative w-full aspect-3/2">
 								<Image

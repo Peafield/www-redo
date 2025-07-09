@@ -2,23 +2,22 @@ import Link from "next/link";
 
 export default function HomeBottomNav() {
 	return (
-		<section className="w-full flex items-center justify-around">
-			<Link
-				href="/archive"
-				className="p-4 border-[1px] border-pink-lemonade rounded-xl transform transition-all shadow-[6px_6px_12px_#edd9db,-6px_-6px_12px_#fff9fd] active:shadow-[inset_4px_4px_12px_#edd9db,-4px_-4px_12px_#fff9fd]"
-			>
-				<h4 className="text-shady-character font-display font-bold text-2xl">
-					Archive
-				</h4>
-			</Link>
-			<Link
-				href="/about"
-				className="p-4 border-[1px] border-pink-lemonade rounded-xl transform transition-all shadow-[6px_6px_12px_#edd9db,-6px_-6px_12px_#fff9fd] active:shadow-[inset_4px_4px_12px_#edd9db,-4px_-4px_12px_#fff9fd]"
-			>
-				<h4 className="text-shady-character font-display font-bold text-2xl">
-					About
-				</h4>
-			</Link>
+		<section className="w-full flex flex-col items-center justify-around gap-4 sm:mt-16">
+			<hr className="h-px bg-classy-mauve border-0 w-full sm:w-1/2" />
+			<p className="text-classy-mauve text-sm font-serif">
+				A collection of poems and thoughts by <em>Wendi Coles</em>.
+			</p>
+			<div className="w-full flex items-center justify-center">
+				<Link href="/archive" className="pr-2 border-r-2 border-classy-mauve">
+					<h4 className="text-shady-character font-display text-sm">Archive</h4>
+				</Link>
+				<Link href="/about" className="px-2 border-r-2 border-classy-mauve">
+					<h4 className="text-shady-character font-display text-sm">About</h4>
+				</Link>
+				<Link href="/contact" className="pl-2">
+					<h4 className="text-shady-character font-display text-sm">Contact</h4>
+				</Link>
+			</div>
 		</section>
 	);
 }

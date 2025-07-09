@@ -9,8 +9,8 @@ type HomeLatestProps = {
 export default function HomeLatest({ title, src, preview }: HomeLatestProps) {
 	const imageUrl = `/api/image/${encodeURIComponent(src)}`;
 	return (
-		<section className="w-full h-full mb-4">
-			<div className="relative w-full aspect-3/2 drop-shadow-2xl rounded-2xl">
+		<section className="w-full h-full mb-4 flex flex-col items-center justify-center">
+			<div className="relative w-full sm:w-2/3 aspect-3/2 drop-shadow-2xl rounded-2xl ">
 				<Image
 					src={imageUrl}
 					alt={`Image for ${title}`}
@@ -21,7 +21,7 @@ export default function HomeLatest({ title, src, preview }: HomeLatestProps) {
 					{title}
 				</h2>
 			</div>
-			<article className="w-full">
+			<article className="w-full sm:w-2/3 p-4">
 				<p className="text-lg italic leading-relaxed tracking-wide text-wrap text-shady-character mt-4 font-serif">
 					{preview}
 				</p>
