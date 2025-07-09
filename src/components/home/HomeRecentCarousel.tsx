@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import type { Post } from "@/types/posts";
 
 type HomeRecentCaourselProps = {
@@ -15,20 +16,29 @@ export function HomeRecentCarousel({
 			<h3 className="font-display font-bold text-2xl text-shady-character mb-4">
 				Recent Poems
 			</h3>
-			<div className="flex overflow-x-auto gap-4 pb-4 -mx-4 px-4 [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden">
+			<div
+				className="flex overflow-x-auto gap-4 pb-4 -mx-4 px-4 [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden
+	sm:[scrollbar-width:auto]
+    sm:[scrollbar-color:#fecdd3_#fff1f2]
+    sm:[&::-webkit-scrollbar]:h-2
+    sm:[&::-webkit-scrollbar-track]:bg-pink-lemonade
+    sm:[&::-webkit-scrollbar-thumb]:bg-shady-character
+    sm:[&::-webkit-scrollbar-thumb]:rounded-full"
+			>
 				{recentPostsData?.map((post) => {
 					const imageUrl = `/api/image/${encodeURIComponent(post.image_url)}`;
 					return (
-						<div
+						<Link
+							href={`/poem/${post._id as string}`}
 							key={post._id as string}
-							className="relative flex-shrink-0 w-48 sm:w-1/2 flex-col"
+							className="group relative flex-shrink-0 w-48 sm:w-1/2 flex-col"
 						>
-							<div className="relative w-full aspect-3/2">
+							<div className="relative w-full aspect-3/2 transform transition-all duration-300 ease-in-out group-hover:scale-95">
 								<Image
 									src={imageUrl}
 									alt={`Image for ${post.title}`}
 									fill
-									className="rounded-2xl object-cover"
+									className="rounded-2xl object-cover shadow-lg"
 								/>
 							</div>
 							<div>
@@ -39,7 +49,7 @@ export function HomeRecentCarousel({
 									{post.preview_text}
 								</p>
 							</div>
-						</div>
+						</Link>
 					);
 				})}
 			</div>

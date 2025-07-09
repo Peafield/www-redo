@@ -36,7 +36,7 @@ export default function Navbar({ className }: NavbarProps) {
 		<nav
 			ref={navRef}
 			className={cn(
-				"sticky inset-x-0 top-0 z-50 backdrop-blur-sm p-6 h-20 bg-pink-lemonade drop-shadow-md",
+				"sticky inset-x-0 top-0 z-50 backdrop-blur-sm p-6 h-20 drop-shadow-md",
 				className,
 			)}
 		>

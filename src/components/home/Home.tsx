@@ -31,6 +31,7 @@ export default function Home({ className }: HomeProps) {
 				})}
 			>
 				<HomeLatest
+					id={postData?.latest?._id as string}
 					title={postData?.latest?.title}
 					src={postData?.latest?.image_url}
 					preview={postData?.latest?.preview_text}
