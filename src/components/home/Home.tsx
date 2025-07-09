@@ -1,25 +1,17 @@
 "use client";
 
-import useGetLatestPosts from "@/Hooks/useGetLatestPosts";
+import type { fetchLatestPostsReponse } from "@/types/posts";
 import { cn } from "@/utils/cn";
-import HomeBottomNav from "../navigation/HomeBottomNav";
+import BottomNav from "../navigation/BottomNav";
 import HomeLatest from "./HomeLastest";
 import { HomeRecentCarousel } from "./HomeRecentCarousel";
 
 type HomeProps = {
+	postData: fetchLatestPostsReponse | null;
 	className?: string;
 };
 
-export default function Home({ className }: HomeProps) {
-	const { postData, loading, error } = useGetLatestPosts();
-	if (loading) {
-		return <h1>Loading...</h1>;
-	}
-
-	if (error) {
-		return <h1>Error: {error.message}</h1>;
-	}
-
+export default function Home({ postData, className }: HomeProps) {
 	if (!postData) {
 		return <h1>No posts found.</h1>;
 	}
@@ -37,7 +29,7 @@ export default function Home({ className }: HomeProps) {
 					preview={postData?.latest?.preview_text}
 				/>
 				<HomeRecentCarousel recentPostsData={postData?.recents} />
-				<HomeBottomNav />
+				<BottomNav />
 			</section>
 		)
 	);

@@ -56,30 +56,32 @@ export default function Navbar({ className }: NavbarProps) {
 								<Link
 									href={link.url}
 									onClick={handleToggleMenu}
-									className="text-shady-character text-lg font-display transform transition-colors duration-200 ease-in hover:text-classy-mauve"
+									className="text-shady-character text-lg font-display transform transition-colors duration-100 ease-in hover:text-classy-mauve"
 								>
 									{link.name}
 								</Link>
 							</li>
 						))}
 					</ul>
-
-					<h1
-						className={cn(
-							"text-center text-xl transition-opacity duration-300 ease-in-out",
-							{
-								"opacity-0 pointer-events-none": isMenuOpen,
-								"opacity-100": !isMenuOpen,
-							},
-						)}
-					>
+					<Link href={"/"}>
+						<h1
+							className={cn(
+								"text-center text-xl transition-opacity duration-300 ease-in-out hover:text-classy-mauve",
+								{
+									"opacity-0 pointer-events-none": isMenuOpen,
+									"opacity-100": !isMenuOpen,
+								},
+							)}
+						>
+							Wendi's Worminghall Whimsies
+						</h1>
+					</Link>
+				</div>
+				<Link href={"/"}>
+					<h1 className="hidden sm:block sm:text-xl transform transition-colors duration-100 ease-in-out hover:text-classy-mauve">
 						Wendi's Worminghall Whimsies
 					</h1>
-				</div>
-
-				<h1 className="hidden sm:block sm:text-xl">
-					Wendi's Worminghall Whimsies
-				</h1>
+				</Link>
 				<ul className="flex items-center justify-end">
 					<li>
 						<button
@@ -96,7 +98,7 @@ export default function Navbar({ className }: NavbarProps) {
 							<Link
 								href={link.url}
 								aria-label={`Maps to ${link.name}`}
-								className="text-shady-character text-lg font-display transform transition-colors duration-200 ease-in hover:text-classy-mauve"
+								className="text-shady-character text-lg font-display transform transition-colors duration-100 ease-in-out hover:text-classy-mauve"
 							>
 								{link.name}
 							</Link>

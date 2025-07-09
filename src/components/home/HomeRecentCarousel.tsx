@@ -21,7 +21,7 @@ export function HomeRecentCarousel({
 	sm:[scrollbar-width:auto]
     sm:[scrollbar-color:#fecdd3_#fff1f2]
     sm:[&::-webkit-scrollbar]:h-2
-    sm:[&::-webkit-scrollbar-track]:bg-pink-lemonade
+    sm:[&::-webkit-scrollbar-track]:bg-classy-mauve
     sm:[&::-webkit-scrollbar-thumb]:bg-shady-character
     sm:[&::-webkit-scrollbar-thumb]:rounded-full"
 			>
