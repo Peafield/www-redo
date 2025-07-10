@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useRef, useState } from "react";
 import { useClickAway } from "react-use";
 import { cn } from "@/utils/cn";
@@ -23,6 +24,7 @@ const navLinks = [
 ];
 
 export default function Navbar({ className }: NavbarProps) {
+	const pathname = usePathname();
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const navRef = useRef<HTMLDivElement>(null);
 	useClickAway(navRef, () => {
@@ -42,6 +44,7 @@ export default function Navbar({ className }: NavbarProps) {
 		>
 			<div className="container flex items-center justify-between mx-auto w-full max-w-3xl">
 				<div className="relative flex-1 flex items-center justify-center sm:hidden">
+					{/* Mobile */}
 					<ul
 						className={cn(
 							"absolute flex items-center justify-around w-full transition-opacity duration-300 ease-in-out",
@@ -56,7 +59,13 @@ export default function Navbar({ className }: NavbarProps) {
 								<Link
 									href={link.url}
 									onClick={handleToggleMenu}
-									className="text-shady-character text-lg font-display transform transition-colors duration-100 ease-in hover:text-classy-mauve"
+									prefetch
+									className={cn(
+										"text-shady-character text-lg font-display transform transition-colors duration-100 ease-in-out",
+										{
+											underline: pathname === link.url,
+										},
+									)}
 								>
 									{link.name}
 								</Link>
@@ -66,7 +75,7 @@ export default function Navbar({ className }: NavbarProps) {
 					<Link href={"/"}>
 						<h1
 							className={cn(
-								"text-center text-xl transition-opacity duration-300 ease-in-out hover:text-classy-mauve",
+								"text-center text-xl transition-opacity duration-300 ease-in-out",
 								{
 									"opacity-0 pointer-events-none": isMenuOpen,
 									"opacity-100": !isMenuOpen,
@@ -77,6 +86,8 @@ export default function Navbar({ className }: NavbarProps) {
 						</h1>
 					</Link>
 				</div>
+
+				{/* Desktop */}
 				<Link href={"/"}>
 					<h1 className="hidden sm:block sm:text-xl transform transition-colors duration-100 ease-in-out hover:text-classy-mauve">
 						Wendi's Worminghall Whimsies
@@ -98,7 +109,14 @@ export default function Navbar({ className }: NavbarProps) {
 							<Link
 								href={link.url}
 								aria-label={`Maps to ${link.name}`}
-								className="text-shady-character text-lg font-display transform transition-colors duration-100 ease-in-out hover:text-classy-mauve"
+								aria-disabled={pathname === link.url}
+								prefetch
+								className={cn(
+									"text-shady-character text-lg font-display transform transition-colors duration-100 ease-in-out hover:text-classy-mauve",
+									{
+										underline: pathname === link.url,
+									},
+								)}
 							>
 								{link.name}
 							</Link>
