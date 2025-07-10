@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { getPoemById } from "@/app/actions/getPoemById";
-import BottomNav from "@/components/navigation/BottomNav";
 import Poem from "@/components/poem/Poem";
 import PoemSkeleton from "@/components/skeletons/PoemSkeleton";
 import type { Post } from "@/types/posts";
@@ -49,10 +48,10 @@ export default async function PoemPage({ params }: GetPoemProps) {
 }
 
 async function GetPoem({ id }: { id: string }) {
-	const poem = await getPoemById(id);
-	if (!poem) {
+	const poemData = await getPoemById(id);
+	if (!poemData) {
 		notFound();
 	}
-
-	return <Poem poem={poem} />;
+	const { poem, nextPoem, previousPoem } = poemData;
+	return <Poem poem={poem} previousPoem={previousPoem} nextPoem={nextPoem} />;
 }

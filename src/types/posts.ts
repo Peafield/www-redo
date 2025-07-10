@@ -54,3 +54,9 @@ export type fetchLatestPostsReponse = {
 	latest: Post;
 	recents: Post[];
 };
+
+export type PoemResponse = {
+	poem: Post;
+	nextPoem: { _id: string; title: string; image_url: string } | null;
+	previousPoem: { _id: string; title: string; image_url: string } | null;
+};
