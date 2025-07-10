@@ -31,7 +31,7 @@ export function HomeRecentCarousel({
 						<Link
 							href={`/poem/${post._id as string}`}
 							key={post._id as string}
-							className="group relative flex-shrink-0 w-48 sm:w-1/2 flex-col"
+							className="group relative flex-shrink-0 w-56 sm:w-1/2 flex-col"
 						>
 							<div className="relative w-full aspect-3/2 transform transition-all duration-300 ease-in-out group-hover:scale-95">
 								<Image

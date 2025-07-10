@@ -11,7 +11,7 @@ export default function PoemSkeleton({ className }: { className?: string }) {
 			<div className="relative w-full sm:w-2/3 aspect-3/2 drop-shadow-2xl rounded-2xl">
 				<div className="w-full h-full bg-classy-mauve rounded-2xl" />
 			</div>
-			<div className="w-full flex items-center justify-end">
+			<div className="flex items-center justify-end w-full sm:w-2xl">
 				<div className="h-4 w-1/4 rounded bg-classy-mauve" />
 			</div>
 			<div className="prose lg:prose-lg w-full mx-auto mb-4">

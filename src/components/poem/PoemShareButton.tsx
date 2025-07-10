@@ -19,11 +19,12 @@ export default function PoemShareButton() {
 		navigator.clipboard.writeText(window.location.href);
 		setLinkCopied(true);
 	};
+
 	return (
 		<button
 			type="button"
 			onClick={handleCopyShareLink}
-			className="group font-bold font-display cursor-pointer flex items-center justify-end w-full sm:w-2xl mb-4"
+			className="group font-bold font-display cursor-pointer flex items-center justify-end w-full sm:w-2xl mb-8"
 		>
 			<div>
 				{linkCopied ? (
