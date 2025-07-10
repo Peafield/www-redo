@@ -38,7 +38,7 @@ export default function RootLayout({
 		>
 			<body className="min-h-screen flex flex-col mx-auto antialiased transition-colors duration-300 ease-in-out">
 				<Navbar />
-				<main className="flex-1 container max-w-6xl mx-auto w-full p-8">
+				<main className="flex flex-col flex-1 container w-full max-w-6xl mx-auto p-8">
 					{children}
 				</main>
 				<Footer />

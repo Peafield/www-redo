@@ -42,7 +42,7 @@ export function HomeRecentCarousel({
 								/>
 							</div>
 							<div>
-								<h4 className="font-semibold font-display text-md mt-2 text-shady-character">
+								<h4 className="font-semibold font-display text-md mt-2 text-shady-character capitalize">
 									{post.title}
 								</h4>
 								<p className="text-sm font-serif text-classy-mauve">

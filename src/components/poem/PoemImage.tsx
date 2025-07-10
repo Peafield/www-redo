@@ -19,7 +19,7 @@ export default function PoemImage({ imageUrl, title }: PoemImageProps) {
 				className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black/60 to-transparent rounded-2xl z-10"
 				aria-hidden="true"
 			/>
-			<h2 className="absolute bottom-4 left-4 w-2/3 tracking-wider text-5xl font-display font-bold text-pink-lemonade z-20">
+			<h2 className="absolute bottom-4 left-4 w-2/3 tracking-wider text-5xl font-display font-bold text-pink-lemonade z-20 capitalize">
 				{title}
 			</h2>
 		</div>

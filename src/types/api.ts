@@ -1,4 +1,5 @@
 import { z } from "zod";
+import type { Post } from "./posts";
 
 export const ApiResponseSchema = z.object({
 	statusCode: z.number(),
@@ -25,4 +26,10 @@ export type ActionResponse<T = unknown> = {
 	message: string;
 	data?: T;
 	error?: string;
+};
+
+export type PaginatedPostsResponse = {
+	posts: Post[];
+	hasMoreToLoad: boolean;
+	totalPosts: number;
 };
