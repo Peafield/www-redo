@@ -6,7 +6,7 @@ type PoemContentProps = {
 
 export default function PoemContent({ content }: PoemContentProps) {
 	return (
-		<div className="prose prose-p:font-serif lg:prose-lg w-full sm:w-2xl mx-auto mb-4">
+		<div className="prose prose-p:font-serif lg:prose-lg w-full mx-auto mb-14">
 			{parse(content)}
 		</div>
 	);

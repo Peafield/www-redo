@@ -8,7 +8,7 @@ type PoemImageProps = {
 export default function PoemImage({ imageUrl, title }: PoemImageProps) {
 	const src = `/api/image/${encodeURIComponent(imageUrl)}`;
 	return (
-		<div className="relative w-full sm:w-2/3 aspect-3/2 drop-shadow-2xl rounded-2xl">
+		<div className="relative w-full aspect-3/2 drop-shadow-2xl rounded-2xl">
 			<Image
 				src={src}
 				alt={`Image for ${title}`}

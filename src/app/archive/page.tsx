@@ -1,13 +1,20 @@
+import { Suspense } from "react";
 import Archive from "@/components/archive/Archive";
+import ArchiveSkeleton from "@/components/skeletons/ArchiveSkeleton";
 import { fetchArchivePosts } from "../actions/fetchArchivePosts";
 
+export const dynamic = "force-dynamic";
+
 export default function ArchivePage() {
-	return <FetchArchivePosts />;
+	return (
+		<Suspense fallback={<ArchiveSkeleton />}>
+			<FetchArchivePosts />
+		</Suspense>
+	);
 }
 
 async function FetchArchivePosts() {
 	const postData = await fetchArchivePosts({});
-	// TODO: Add skeleton
 	return <Archive postData={postData} />;
 }
 

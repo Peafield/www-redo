@@ -54,10 +54,5 @@ async function GetPoem({ id }: { id: string }) {
 		notFound();
 	}
 
-	return (
-		<>
-			<Poem poem={poem} />
-			<BottomNav />
-		</>
-	);
+	return <Poem poem={poem} />;
 }
