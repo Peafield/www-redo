@@ -60,3 +60,21 @@ export type PoemResponse = {
 	nextPoem: { _id: string; title: string; image_url: string } | null;
 	previousPoem: { _id: string; title: string; image_url: string } | null;
 };
+
+export const CommentSchema = z.object({
+	_id: ObjectIdSchema,
+	poemId: ObjectIdSchema,
+	author: z.string(),
+	content: z.string(),
+	date: z.string(),
+});
+
+export type Comment = z.infer<typeof CommentSchema>;
+
+export const CommentCreationSchema = z.object({
+	poemId: ObjectIdSchema,
+	author: z.string(),
+	content: z.string(),
+});
+
+export type CommentCreation = z.infer<typeof CommentCreationSchema>;
