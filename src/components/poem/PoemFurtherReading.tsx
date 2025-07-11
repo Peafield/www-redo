@@ -17,14 +17,14 @@ export default function PoemFurtherReading({
 				{nextPoem && (
 					<Link
 						href={`/poem/${nextPoem._id}`}
-						className="group flex items-center space-x-4 text-shady-character hover:text-classy-mauve transition-colors duration-300 ease-in-out"
+						className="group flex items-center text-shady-character hover:text-classy-mauve transition-colors duration-300 ease-in-out"
 					>
-						<ChevronLeftIcon className="size-10 " />
-						<div className="flex flex-col w-full">
-							<span className="font-serif text-sm uppercase tracking-wider">
+						<ChevronLeftIcon className="size-8 sm:size-10 flex-shrink-0" />
+						<div className="flex flex-col justify-center w-full">
+							<span className="font-serif text-xs sm:text-sm uppercase sm:tracking-wider">
 								Previous
 							</span>
-							<span className="font-bold font-display text-classy-mauve capitalize tracking-wide">
+							<span className="font-bold font-display text-xs sm:text-sm text-classy-mauve capitalize sm:tracking-wide">
 								{nextPoem.title}
 							</span>
 						</div>
@@ -35,17 +35,17 @@ export default function PoemFurtherReading({
 				{previousPoem && (
 					<Link
 						href={`/poem/${previousPoem._id}`}
-						className="group flex items-center justify-end space-x-4 text-shady-character hover:text-classy-mauve transition-colors duration-300 ease-in-out"
+						className="group flex items-center justify-end text-shady-character hover:text-classy-mauve transition-colors duration-300 ease-in-out"
 					>
-						<div className="flex flex-col w-full">
-							<span className="font-serif text-sm uppercase tracking-wider text-right">
+						<div className="flex flex-col justify-center w-full">
+							<span className="font-serif text-xs sm:text-sm uppercase sm:tracking-wider text-right">
 								Next
 							</span>
-							<span className="font-bold font-display text-classy-mauve capitalize tracking-wide text-right">
+							<span className="font-bold text-xs sm:text-sm font-display text-classy-mauve capitalize sm:tracking-wide text-right">
 								{previousPoem.title}
 							</span>
 						</div>
-						<ChevronRightIcon className="size-10" />
+						<ChevronRightIcon className="size-8 sm:size-10 flex-shrink-0" />
 					</Link>
 				)}
 			</div>
