@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { getPoemById } from "@/app/actions/getPoemById";
+import { getPoemCommentsbyId } from "@/app/actions/getPoemCommentsById";
 import Poem from "@/components/poem/Poem";
 import PoemSkeleton from "@/components/skeletons/PoemSkeleton";
-import type { Post } from "@/types/posts";
+import type { Comment } from "@/types/posts";
 
 export const dynamic = "force-dynamic";
 
@@ -18,11 +19,9 @@ export async function generateMetadata({
 	params: Promise<{ id: string }>;
 }): Promise<Metadata> {
 	const id = (await params).id;
-	const response = await fetch(
-		`${process.env.NEXT_PUBLIC_APP_URL}/api/poem/${id}`,
-	);
-	if (response.ok) {
-		const poem: Post = await response.json();
+	const poemData = await getPoemById(id);
+	if (poemData) {
+		const { poem } = poemData;
 
 		return {
 			openGraph: {
@@ -49,9 +48,17 @@ export default async function PoemPage({ params }: GetPoemProps) {
 
 async function GetPoem({ id }: { id: string }) {
 	const poemData = await getPoemById(id);
+	const poemComments = await getPoemCommentsbyId(id);
 	if (!poemData) {
 		notFound();
 	}
 	const { poem, nextPoem, previousPoem } = poemData;
-	return <Poem poem={poem} previousPoem={previousPoem} nextPoem={nextPoem} />;
+	return (
+		<Poem
+			poem={poem}
+			poemComments={poemComments as Comment[]}
+			previousPoem={previousPoem}
+			nextPoem={nextPoem}
+		/>
+	);
 }

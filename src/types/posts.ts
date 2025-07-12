@@ -67,14 +67,23 @@ export const CommentSchema = z.object({
 	author: z.string(),
 	content: z.string(),
 	date: z.string(),
+	status: z.enum(["pending", "approved", "rejected"]),
 });
+
+export const CommentArraySchema = z.array(CommentSchema);
 
 export type Comment = z.infer<typeof CommentSchema>;
 
 export const CommentCreationSchema = z.object({
 	poemId: ObjectIdSchema,
-	author: z.string(),
-	content: z.string(),
+	author: z
+		.string()
+		.min(2, { message: "Names must be at least two characters" }),
+	content: z
+		.string()
+		.min(2, { message: "Comments must be at least two characters" }),
+	date: z.string(),
+	status: z.enum(["pending", "approved", "rejected"]),
 });
 
 export type CommentCreation = z.infer<typeof CommentCreationSchema>;

@@ -1,3 +1,5 @@
+"use server";
+
 import { ObjectId } from "mongodb";
 import clientPromise from "@/lib/mongodb";
 import { type PoemResponse, type Post, PostSchema } from "@/types/posts";
@@ -57,7 +59,9 @@ export async function getPoemById(id: string): Promise<PoemResponse | null> {
 			nextPoem: nextPoem ? { ...nextPoem, _id: nextPoem._id.toString() } : null,
 		};
 	} catch (error) {
-		console.error("Error fetching poem by ID:", error);
+		if (process.env.NODE_ENV === "development") {
+			console.error("Error fetching poem by ID:", error);
+		}
 		return null;
 	}
 }
