@@ -24,16 +24,16 @@ export default function PoemShareButton() {
 		<button
 			type="button"
 			onClick={handleCopyShareLink}
-			className="group cursor-pointer flex items-center justify-center gap-x-1"
+			className="group cursor-pointer flex items-center justify-center gap-x-1 pt-2"
 		>
 			{linkCopied ? (
 				<TickIcon
 					className={cn(
-						"size-3.5 text-shady-character transform transition-colors duration-300 ease-in-out animate-fade-out group-hover:text-classy-mauve",
+						"size-4 text-shady-character transform transition-colors duration-300 ease-in-out animate-fade-out group-hover:text-classy-mauve",
 					)}
 				/>
 			) : (
-				<ShareIcon className="size-3.5 text-shady-character group-hover:text-classy-mauve transform transition-colors duration-300 ease-in-out" />
+				<ShareIcon className="size-4 text-shady-character group-hover:text-classy-mauve transform transition-colors duration-300 ease-in-out" />
 			)}
 			<h3 className="font-serif text-shady-character group-hover:text-classy-mauve transform transition-colors duration-300 ease-in-out">
 				{linkCopied ? "Copied!" : "Share"}
