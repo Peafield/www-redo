@@ -61,8 +61,9 @@ export type PoemResponse = {
 	previousPoem: { _id: string; title: string; image_url: string } | null;
 };
 
-export const CommentSchema = z.object({
+const BaseCommentSchema = z.object({
 	_id: ObjectIdSchema,
+	replyToCommentId: ObjectIdSchema.optional(),
 	poemId: ObjectIdSchema,
 	author: z.string(),
 	content: z.string(),
@@ -70,12 +71,19 @@ export const CommentSchema = z.object({
 	status: z.enum(["pending", "approved", "rejected"]),
 });
 
-export const CommentArraySchema = z.array(CommentSchema);
+export type Comment = z.infer<typeof BaseCommentSchema> & {
+	replies?: Comment[];
+};
 
-export type Comment = z.infer<typeof CommentSchema>;
+export const CommentSchema: z.ZodType<Comment> = BaseCommentSchema.extend({
+	replies: z.lazy(() => z.array(CommentSchema)).optional(),
+});
+
+export const CommentArraySchema = z.array(CommentSchema);
 
 export const CommentCreationSchema = z.object({
 	poemId: ObjectIdSchema,
+	replyToCommentId: ObjectIdSchema.optional(),
 	author: z
 		.string()
 		.min(2, { message: "Names must be at least two characters" }),

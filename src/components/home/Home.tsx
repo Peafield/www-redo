@@ -19,7 +19,7 @@ export default function Home({ postData, className }: HomeProps) {
 	return (
 		postData && (
 			<section
-				className={cn("flex flex-col gap-8 w-full", {
+				className={cn("flex flex-col gap-4 w-full", {
 					[className as string]: !!className,
 				})}
 			>

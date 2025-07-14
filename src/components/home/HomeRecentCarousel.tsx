@@ -13,7 +13,7 @@ export function HomeRecentCarousel({
 	recentPostsData,
 }: HomeRecentCaourselProps) {
 	return (
-		<section>
+		<section className="sm:mt-8">
 			<Subheading text={"Recent Poems"} />
 			<div
 				className="flex overflow-x-auto gap-4 pb-4 -mx-4 px-4 [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden

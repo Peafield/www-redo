@@ -3,9 +3,13 @@ import PoemComment from "./PoemComment";
 
 type PoemCommentsProps = {
 	comments: Comment[];
+	onReplyClick: (commentId: string) => void;
 };
 
-export default function PoemComments({ comments }: PoemCommentsProps) {
+export default function PoemComments({
+	comments,
+	onReplyClick,
+}: PoemCommentsProps) {
 	const totalComments = comments.length;
 	return (
 		<section className="w-full sm:w-2/3">
@@ -16,7 +20,11 @@ export default function PoemComments({ comments }: PoemCommentsProps) {
 			</div>
 			<div className="space-y-8">
 				{comments.map((comment) => (
-					<PoemComment key={comment._id as string} comment={comment} />
+					<PoemComment
+						key={comment._id as string}
+						comment={comment}
+						onReplyClick={() => onReplyClick(comment._id as string)}
+					/>
 				))}
 			</div>
 		</section>

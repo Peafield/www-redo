@@ -1,7 +1,11 @@
 "use server";
 
 import clientPromise from "@/lib/mongodb";
-import { type CommentCreation, CommentCreationSchema } from "@/types/posts";
+import {
+	type Comment,
+	type CommentCreation,
+	CommentCreationSchema,
+} from "@/types/posts";
 
 type SubmitCommentActionResult = {
 	success: boolean;
@@ -11,7 +15,6 @@ type SubmitCommentActionResult = {
 		content?: string[];
 	};
 	error?: string;
-	comment?: CommentCreation;
 };
 
 // TODO: add rate limiting to comment submission with REDIS.
@@ -26,6 +29,7 @@ export async function submitCommentAction(
 	}
 	const rawCommentData = {
 		poemId: formData.get("poemId"),
+		replyToCommentId: formData.get("replyToCommentId") || undefined,
 		author: formData.get("author"),
 		content: formData.get("comment"),
 		date: new Date().toISOString(),
@@ -64,18 +68,8 @@ export async function submitCommentAction(
 			};
 		}
 
-		const plainCommentObject = {
-			_id: insertedComment._id.toString(),
-			poemId: insertedComment.poemId.toString(),
-			author: insertedComment.author,
-			content: insertedComment.content,
-			date: insertedComment.date,
-			status: insertedComment.status,
-		};
-
 		return {
 			success: true,
-			comment: plainCommentObject,
 		};
 	} catch (error) {
 		if (process.env.NODE_ENV === "development") {

@@ -3,9 +3,13 @@ import type { Comment } from "@/types/posts";
 
 type PoemCommentProps = {
 	comment: Comment;
+	onReplyClick: () => void;
 };
 
-export default function PoemComment({ comment }: PoemCommentProps) {
+export default function PoemComment({
+	comment,
+	onReplyClick,
+}: PoemCommentProps) {
 	const timeAgo = formatDistanceToNow(new Date(comment.date), {
 		addSuffix: true,
 	});
@@ -19,6 +23,13 @@ export default function PoemComment({ comment }: PoemCommentProps) {
 			<p className="text-sm text-shady-character font-serif">
 				{comment.content}
 			</p>
+			<button
+				type="button"
+				onClick={onReplyClick}
+				className="text-sm mt-2 text-left text-shady-character/75 font-serif cursor-pointer hover:text-classy-mauve"
+			>
+				Reply
+			</button>
 		</div>
 	);
 }

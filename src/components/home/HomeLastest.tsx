@@ -17,7 +17,7 @@ export default function HomeLatest({
 }: HomeLatestProps) {
 	const imageUrl = `/api/image/${encodeURIComponent(src)}`;
 	return (
-		<section className="group w-full h-full flex flex-col gap-4">
+		<section className="group w-full h-full flex flex-col">
 			<Subheading text={"Lastest Poem"} />
 			<div className="flex flex-col items-center justify-center gap-4">
 				<Link
@@ -38,8 +38,8 @@ export default function HomeLatest({
 						{title}
 					</h2>
 				</Link>
-				<blockquote className="flex p-4">
-					<p className="text-lg italic leading-relaxed tracking-wide text-wrap text-shady-character my-4 font-serif">
+				<blockquote className="flex my-4">
+					<p className="text-lg italic leading-relaxed tracking-wide text-wrap text-shady-character font-serif">
 						"{preview}"
 					</p>
 				</blockquote>
