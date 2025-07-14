@@ -1,8 +1,8 @@
 function ArchivePoemCardSkeleton() {
 	return (
-		<div className="w-full flex-shrink-0 flex items-center justify-center gap-4">
-			<div className="aspect-3/2 w-1/2 rounded-2xl bg-classy-mauve" />
-			<div className="mt-2 w-1/2 flex flex-col gap-2">
+		<div className="group relative flex-shrink-0 w-full flex flex-col gap-4 pb-4 bg-classy-mauve/50 rounded-2xl">
+			<div className="w-full aspect-3/2 rounded-2xl bg-classy-mauve" />
+			<div className="flex flex-col gap-4 px-4">
 				<div className="h-4 rounded bg-classy-mauve" />
 				<div className="h-3 w-full rounded bg-classy-mauve" />
 			</div>

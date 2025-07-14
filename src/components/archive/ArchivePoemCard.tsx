@@ -11,9 +11,9 @@ export default function ArchivePoemCard({ post }: ArchivePoemCardProps) {
 	return (
 		<Link
 			href={`/poem/${post._id as string}`}
-			className="group relative flex-shrink-0 w-full flex items-center justify-center gap-4 border-b-1 border-classy-mauve pb-4"
+			className="group relative flex-shrink-0 w-full flex flex-col gap-4 pb-4 bg-classy-mauve/50 rounded-2xl"
 		>
-			<div className="relative w-1/2 aspect-3/2 transform transition-all duration-300 ease-in-out group-hover:scale-95">
+			<div className="relative w-full aspect-3/2 transform transition-all duration-300 ease-in-out group-hover:scale-105">
 				<Image
 					src={imageUrl}
 					alt={`Image for ${post.title}`}
@@ -21,21 +21,23 @@ export default function ArchivePoemCard({ post }: ArchivePoemCardProps) {
 					className="rounded-2xl object-cover shadow-lg"
 				/>
 			</div>
-			<div className="flex flex-col items-start justify-around w-1/2 h-full">
-				<h4 className="font-semibold font-display text-md mt-2 text-shady-character capitalize">
-					{post.title}
-				</h4>
-				<p className="text-sm font-serif text-classy-mauve">
-					{post.preview_text}
-				</p>
-				<button
-					type="button"
-					className="w-full flex items-center justify-end mt-4"
-				>
-					<p className="text-sm font-serif text-shady-character italic hover:text-classy-mauve transform transition-all duration-300 ease-in-out cursor-pointer">
-						Read More
+			<div className="flex flex-col gap-4 px-4">
+				<div>
+					<h4 className="font-semibold font-display text-md mt-2 text-shady-character capitalize">
+						{post.title}
+					</h4>
+					<p className="text-sm font-serif text-shady-character truncate">
+						{post.preview_text}
 					</p>
-				</button>
+				</div>
+				<div className="flex items-center w-full">
+					<button
+						className="w-full sm:w-1/3 px-6 py-2 border border-transparent text-base font-medium rounded-md shadow-sm font-serif text-pink-lemonade bg-shady-character hover:bg-classy-mauve focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-classy-mauve cursor-pointer transition-colors duration-300 ease-in-out"
+						type="button"
+					>
+						Read more
+					</button>
+				</div>
 			</div>
 		</Link>
 	);

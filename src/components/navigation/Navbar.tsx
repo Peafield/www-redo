@@ -61,7 +61,7 @@ export default function Navbar({ className }: NavbarProps) {
 									onClick={handleToggleMenu}
 									prefetch
 									className={cn(
-										"text-shady-character text-lg font-display transform transition-colors duration-100 ease-in-out",
+										"text-shady-character text-lg font-serif transform transition-colors duration-100 ease-in-out",
 										{
 											underline: pathname === link.url,
 										},

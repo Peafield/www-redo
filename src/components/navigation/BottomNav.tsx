@@ -1,9 +1,10 @@
 import Link from "next/link";
+import ThematicBreak from "../visuals/ThematicBreak";
 
 export default function BottomNav() {
 	return (
 		<section className="w-full flex flex-col items-center justify-around gap-4 sm:mt-16">
-			<hr className="h-px bg-classy-mauve border-0 w-full sm:w-1/2" />
+			<ThematicBreak />
 			<p className="text-classy-mauve text-sm font-serif">
 				A collection of poems and thoughts by <em>Wendi Coles</em>.
 			</p>

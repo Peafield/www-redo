@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Post } from "@/types/posts";
+import Subheading from "../typography/Subheading";
 
 type HomeRecentCaourselProps = {
 	recentPostsData: Post[];
@@ -13,9 +14,7 @@ export function HomeRecentCarousel({
 }: HomeRecentCaourselProps) {
 	return (
 		<section>
-			<h3 className="font-display font-bold text-2xl text-shady-character mb-4">
-				Recent Poems
-			</h3>
+			<Subheading text={"Recent Poems"} />
 			<div
 				className="flex overflow-x-auto gap-4 pb-4 -mx-4 px-4 [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden
 	sm:[scrollbar-width:auto]

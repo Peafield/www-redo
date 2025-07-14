@@ -3,6 +3,7 @@
 import type { fetchLatestPostsReponse } from "@/types/posts";
 import { cn } from "@/utils/cn";
 import BottomNav from "../navigation/BottomNav";
+import ThematicBreak from "../visuals/ThematicBreak";
 import HomeLatest from "./HomeLastest";
 import { HomeRecentCarousel } from "./HomeRecentCarousel";
 
@@ -18,7 +19,7 @@ export default function Home({ postData, className }: HomeProps) {
 	return (
 		postData && (
 			<section
-				className={cn("flex flex-col gap-4 w-full", {
+				className={cn("flex flex-col gap-8 w-full", {
 					[className as string]: !!className,
 				})}
 			>
@@ -28,6 +29,7 @@ export default function Home({ postData, className }: HomeProps) {
 					src={postData?.latest?.image_url}
 					preview={postData?.latest?.preview_text}
 				/>
+				<ThematicBreak />
 				<HomeRecentCarousel recentPostsData={postData?.recents} />
 				<BottomNav />
 			</section>

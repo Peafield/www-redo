@@ -5,6 +5,7 @@ import { fetchArchivePosts } from "@/app/actions/fetchArchivePosts";
 import type { PaginatedPostsResponse } from "@/types/api";
 import BottomNav from "../navigation/BottomNav";
 import ChevronDownIcon from "../svgs/ChevronDownIcon";
+import Subheading from "../typography/Subheading";
 import ArchivePoemCard from "./ArchivePoemCard";
 
 type ArchiveProps = {
@@ -32,11 +33,9 @@ export default function ArchivePage({ postData }: ArchiveProps) {
 	};
 
 	return (
-		<section className="h-full flex-1 flex flex-col gap-6 w-full">
-			<h3 className="font-display font-bold text-2xl text-shady-character mb-4">
-				Archive
-			</h3>
-			<div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+		<section className="h-full flex flex-col gap-6 w-full">
+			<Subheading text={"Archive"} />
+			<div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
 				{posts.map((post) => (
 					<ArchivePoemCard key={post._id as string} post={post} />
 				))}
@@ -47,12 +46,11 @@ export default function ArchivePage({ postData }: ArchiveProps) {
 						type="button"
 						onClick={handleLoadMore}
 						disabled={isPending}
-						className="px-6 py-3 text-shady-character text-xl font-display font-bold disabled:text-classy-mauve cursor-pointer hover:text-classy-mauve flex flex-col items-center justify-center"
+						className="w-full sm:w-1/2 px-6 py-2 border border-transparent text-base font-medium rounded-md shadow-sm font-serif text-pink-lemonade bg-shady-character hover:bg-classy-mauve focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-classy-mauve cursor-pointer transition-colors duration-300 ease-in-out"
 					>
 						<h4 className="tracking-wide">
 							{isPending ? "Loading..." : "Load More"}
 						</h4>
-						<ChevronDownIcon className="size-6" />
 					</button>
 				)}
 			</div>
