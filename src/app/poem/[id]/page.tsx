@@ -49,7 +49,6 @@ export default async function PoemPage({ params }: GetPoemProps) {
 async function GetPoem({ id }: { id: string }) {
 	const poemData = await getPoemById(id);
 	const poemComments = await getPoemCommentsbyId(id);
-	console.log("🚀 ~ GetPoem ~ poemComments:", poemComments);
 	if (!poemData) {
 		notFound();
 	}

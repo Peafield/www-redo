@@ -12,7 +12,6 @@ export default function PoemComments({
 	comments,
 	onReplyClick,
 }: PoemCommentsProps) {
-	console.log(comments);
 	const totalComments = comments.length;
 	return (
 		<section className="w-full sm:w-2/3 space-y-16">
