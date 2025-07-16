@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Post } from "@/types/posts";
+import PrimaryButton from "../buttons/PrimaryButton";
 
 type ArchivePoemCardProps = {
 	post: Post;
@@ -31,12 +32,7 @@ export default function ArchivePoemCard({ post }: ArchivePoemCardProps) {
 					</p>
 				</div>
 				<div className="flex items-center w-full">
-					<button
-						className="w-full sm:w-1/3 px-6 py-2 border border-transparent text-base font-medium rounded-md shadow-sm font-serif text-pink-lemonade bg-shady-character hover:bg-classy-mauve focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-classy-mauve cursor-pointer transition-colors duration-300 ease-in-out"
-						type="button"
-					>
-						Read more
-					</button>
+					<PrimaryButton type="button" title="Read more" />
 				</div>
 			</div>
 		</Link>

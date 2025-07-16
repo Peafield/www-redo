@@ -2,6 +2,7 @@
 
 import { useActionState, useEffect, useImperativeHandle, useRef } from "react";
 import { submitCommentAction } from "@/app/actions/submitCommentAction";
+import PrimaryButton from "@/components/buttons/PrimaryButton";
 
 export type PoemCommentFormHandle = {
 	focusAuthorInput: () => void;
@@ -10,12 +11,14 @@ export type PoemCommentFormHandle = {
 
 type PoemCommentFormProps = {
 	poemId: string;
+	poemTitle: string;
 	replyToCommentId: string | null;
 	onCancelReply: () => void;
 };
 
 export default function PoemCommentForm({
 	poemId,
+	poemTitle,
 	ref,
 	replyToCommentId,
 	onCancelReply,
@@ -46,6 +49,7 @@ export default function PoemCommentForm({
 	return (
 		<form ref={formRef} action={formAction} className="my-12 w-full sm:w-2/3">
 			<input type="hidden" name="poemId" value={poemId} />
+			<input type="hidden" name="poemTitle" value={poemTitle} />
 			{replyToCommentId && (
 				<input type="hidden" name="replyToCommentId" value={replyToCommentId} />
 			)}
@@ -110,21 +114,17 @@ export default function PoemCommentForm({
 				)}
 				<div>
 					<div className="flex items-center justify-between w-full">
-						<button
-							className="inline-flex items-center px-6 py-2 border border-transparent text-base font-medium rounded-md shadow-sm font-serif text-pink-lemonade bg-shady-character mb-4 hover:bg-classy-mauve focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-classy-mauve cursor-pointer transition-colors duration-300 ease-in-out"
+						<PrimaryButton
+							title={isPending ? "Submitting..." : "Post comment"}
 							type="submit"
 							disabled={isPending}
-						>
-							{isPending ? "Submitting..." : "Post comment"}
-						</button>
+						/>
 						{replyToCommentId && (
-							<button
-								className="inline-flex items-center px-6 py-2 border border-transparent text-base font-medium rounded-md shadow-sm font-serif text-pink-lemonade bg-shady-character mb-4 hover:bg-classy-mauve focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-classy-mauve cursor-pointer transition-colors duration-300 ease-in-out"
+							<PrimaryButton
 								type="button"
+								title="Cancel"
 								onClick={onCancelReply}
-							>
-								Cancel
-							</button>
+							/>
 						)}
 					</div>
 					{commentState?.success === true && (

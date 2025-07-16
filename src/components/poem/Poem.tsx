@@ -54,6 +54,7 @@ export default function PoemPage({
 			<PoemCommentForm
 				ref={commentFormRef}
 				poemId={poem._id as string}
+				poemTitle={poem.title}
 				replyToCommentId={replyToCommentId}
 				onCancelReply={handleCancelReplyClick}
 			/>

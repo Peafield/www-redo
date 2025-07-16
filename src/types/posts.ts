@@ -65,6 +65,7 @@ const BaseCommentSchema = z.object({
 	_id: ObjectIdSchema,
 	replyToCommentId: ObjectIdSchema.optional(),
 	poemId: ObjectIdSchema,
+	poemTitle: z.string().optional(),
 	author: z.string(),
 	content: z.string(),
 	date: z.string(),
@@ -83,6 +84,7 @@ export const CommentArraySchema = z.array(CommentSchema);
 
 export const CommentCreationSchema = z.object({
 	poemId: ObjectIdSchema,
+	poemTitle: z.string().optional(),
 	replyToCommentId: ObjectIdSchema.optional(),
 	author: z
 		.string()

@@ -1,11 +1,7 @@
 "use server";
 
 import clientPromise from "@/lib/mongodb";
-import {
-	type Comment,
-	type CommentCreation,
-	CommentCreationSchema,
-} from "@/types/posts";
+import { type CommentCreation, CommentCreationSchema } from "@/types/posts";
 
 type SubmitCommentActionResult = {
 	success: boolean;
@@ -29,6 +25,7 @@ export async function submitCommentAction(
 	}
 	const rawCommentData = {
 		poemId: formData.get("poemId"),
+		poemTitle: formData.get("poemTitle"),
 		replyToCommentId: formData.get("replyToCommentId") || undefined,
 		author: formData.get("author"),
 		content: formData.get("comment"),

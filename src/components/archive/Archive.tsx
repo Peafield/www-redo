@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { fetchArchivePosts } from "@/app/actions/fetchArchivePosts";
 import type { PaginatedPostsResponse } from "@/types/api";
+import PrimaryButton from "../buttons/PrimaryButton";
 import BottomNav from "../navigation/BottomNav";
 import Subheading from "../typography/Subheading";
 import ArchivePoemCard from "./ArchivePoemCard";
@@ -41,16 +42,12 @@ export default function ArchivePage({ postData }: ArchiveProps) {
 			</div>
 			<div className="flex justify-center mt-12">
 				{hasMoreToLoad && (
-					<button
+					<PrimaryButton
 						type="button"
+						title={isPending ? "Loading..." : "Load More"}
 						onClick={handleLoadMore}
 						disabled={isPending}
-						className="w-full sm:w-1/2 px-6 py-2 border border-transparent text-base font-medium rounded-md shadow-sm font-serif text-pink-lemonade bg-shady-character hover:bg-classy-mauve focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-classy-mauve cursor-pointer transition-colors duration-300 ease-in-out"
-					>
-						<h4 className="tracking-wide">
-							{isPending ? "Loading..." : "Load More"}
-						</h4>
-					</button>
+					/>
 				)}
 			</div>
 			<BottomNav />
