@@ -12,7 +12,12 @@ type NavbarProps = {
 	className?: string;
 };
 
-const navLinks = [
+type NavLinks = {
+	name: string;
+	url: string;
+}[];
+
+const baseNavLinks: NavLinks = [
 	{
 		name: "About",
 		url: "/about",
@@ -23,8 +28,28 @@ const navLinks = [
 	},
 ];
 
+const adminNavLinks: NavLinks = [
+	{
+		name: "New poem",
+		url: "/admin/new-poem",
+	},
+	{
+		name: "Moderation",
+		url: "/admin/moderation",
+	},
+	{
+		name: "Logout",
+		url: "/admin/logout",
+	},
+];
+
 export default function Navbar({ className }: NavbarProps) {
 	const pathname = usePathname();
+	const isAdmin = pathname.startsWith("/admin");
+	const navLinks = isAdmin ? adminNavLinks : baseNavLinks;
+	const navbarTitle = isAdmin
+		? "Admin Dashboard"
+		: "Wendi's Worminghall Whimsies";
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const navRef = useRef<HTMLDivElement>(null);
 	useClickAway(navRef, () => {
@@ -82,7 +107,7 @@ export default function Navbar({ className }: NavbarProps) {
 								},
 							)}
 						>
-							Wendi's Worminghall Whimsies
+							{navbarTitle}
 						</h1>
 					</Link>
 				</div>
@@ -90,7 +115,7 @@ export default function Navbar({ className }: NavbarProps) {
 				{/* Desktop */}
 				<Link href={"/"}>
 					<h1 className="hidden sm:block sm:text-xl transform transition-colors duration-100 ease-in-out hover:text-classy-mauve">
-						Wendi's Worminghall Whimsies
+						{navbarTitle}
 					</h1>
 				</Link>
 				<ul className="flex items-center justify-end">
@@ -112,7 +137,7 @@ export default function Navbar({ className }: NavbarProps) {
 								aria-disabled={pathname === link.url}
 								prefetch
 								className={cn(
-									"text-shady-character text-lg font-display transform transition-colors duration-100 ease-in-out hover:text-classy-mauve",
+									"text-shady-character text-lg font-serif transform transition-colors duration-100 ease-in-out hover:text-classy-mauve",
 									{
 										underline: pathname === link.url,
 									},
