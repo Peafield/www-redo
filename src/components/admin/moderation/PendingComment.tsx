@@ -1,25 +1,25 @@
-"use client";
-
 import { formatDistanceToNow } from "date-fns";
 import { useState } from "react";
 import {
 	approveComment,
 	rejectComment,
 } from "@/app/actions/commentModerationActions";
-import PrimaryButton from "@/components/buttons/PrimaryButton";
 import Modal from "@/components/modal/Modal";
+import DeleteIcon from "@/components/svgs/DeleteIcon";
+import TickIcon from "@/components/svgs/TickIcon";
+import ThematicBreak from "@/components/visuals/ThematicBreak";
 import type { CommentModerationModal } from "@/types/components";
 import type { Comment } from "@/types/posts";
 
-type PendingCommentTableRowProps = {
+type PendingCommentProps = {
 	comment: Comment;
 	updatePendingComments: () => void;
 };
 
-export default function PendingCommentTableRow({
+export default function PendingComment({
 	comment,
 	updatePendingComments,
-}: PendingCommentTableRowProps) {
+}: PendingCommentProps) {
 	const [showModal, setShowModal] = useState(false);
 	const [modalType, setModalType] = useState<CommentModerationModal | null>(
 		null,
@@ -90,39 +90,31 @@ export default function PendingCommentTableRow({
 					{modalType.children}
 				</Modal>
 			)}
-			<tr className="border-t border-t-classy-mauve/50">
-				<td className="py-4 px-3 whitespace-nowrap sm:whitespace-normal text-left font-serif text-shady-character text-sm font-medium leading-normal">
-					{comment.content}
-				</td>
-				<td className="py-4 px-3 whitespace-nowrap text-left font-serif text-shady-character text-sm font-medium leading-normal ">
-					{comment.author}
-				</td>
-				<td className="py-4 px-3 whitespace-nowrap text-left font-serif text-shady-character text-sm font-medium leading-normal capitalize">
-					{comment.poemTitle}
-				</td>
-				<td className="py-4 px-3 whitespace-nowrap text-left font-serif text-shady-character text-sm font-medium leading-normal">
-					{timeAgo}
-				</td>
-				<td className="py-4 px-3 whitespace-nowrap text-left font-serif text-shady-character text-sm font-medium leading-normal">
-					{comment.status}
-				</td>
-				<td className="py-4 px-3 whitespace-nowrap">
-					<div className="flex items-center justify-start gap-4">
-						<PrimaryButton
-							title={"Approve"}
-							type="button"
-							className="mb-0"
-							onClick={() => toggleModal("approve")}
-						/>
-						<PrimaryButton
-							title={"Reject"}
-							type="button"
-							className="mb-0 bg-red-400 hover:bg-red-500"
-							onClick={() => toggleModal("reject")}
-						/>
-					</div>
-				</td>
-			</tr>
+			<div className="flex items-start space-x-4">
+				<div className="flex-grow">
+					<p className="font-serif italic text-shady-character">{`On "${comment.poemTitle}"`}</p>
+					<p className="mt-2 font-serif text-shady-character">
+						{comment.content}
+					</p>
+					<div className="text-sm font-serif text-shady-character/50 mt-1">{`- ${comment.author}, ${timeAgo}`}</div>
+				</div>
+				<div className="flex space-x-2 flex-shrink-0">
+					<button
+						type="button"
+						className="p-2 rounded-full hover:bg-green-100 cursor-pointer"
+						onClick={() => toggleModal("approve")}
+					>
+						<TickIcon className="size-4 text-green-600" />
+					</button>
+					<button
+						type="button"
+						className="p-2 rounded-full hover:bg-red-100 cursor-pointer"
+						onClick={() => toggleModal("reject")}
+					>
+						<DeleteIcon className="size-4 text-red-600" />
+					</button>
+				</div>
+			</div>
 		</>
 	);
 }

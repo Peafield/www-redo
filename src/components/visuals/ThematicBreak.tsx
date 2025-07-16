@@ -6,12 +6,12 @@ type ThematicBreakProps = {
 
 export default function ThematicBreak({ className }: ThematicBreakProps) {
 	return (
-		<div
-			className={cn("w-full flex items-center justify-center", {
-				[className as string]: !!className,
-			})}
-		>
-			<hr className="h-px bg-classy-mauve border-0 w-2/3" />
+		<div className="w-full flex items-center justify-center">
+			<hr
+				className={cn("h-px border-t border-classy-mauve/50 w-full", {
+					[className as string]: !!className,
+				})}
+			/>
 		</div>
 	);
 }

@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { getPendingComments } from "@/app/actions/getPendingComments";
-import AdminDashboard from "@/components/admin/AdminDashboard";
+import CommentModeration from "@/components/admin/moderation/CommentModeration";
 
 export const dynamic = "force-dynamic";
 
-export default function AdminModerationPage() {
+export default function AdminCommentModerationPage() {
 	return (
 		<Suspense fallback={<div>Loading...</div>}>
 			<GetAdminData />
@@ -19,5 +19,5 @@ async function GetAdminData() {
 		notFound();
 	}
 
-	return <AdminDashboard pendingComments={pendingComments} />;
+	return <CommentModeration pendingComments={pendingComments} />;
 }

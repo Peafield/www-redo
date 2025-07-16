@@ -3,20 +3,20 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getPendingComments } from "@/app/actions/getPendingComments";
+import ArrowIcon from "@/components/svgs/ArrowIcon";
+import TeaIcon from "@/components/svgs/TeaIcon";
+import Subheading from "@/components/typography/Subheading";
+import ThematicBreak from "@/components/visuals/ThematicBreak";
 import type { Comment } from "@/types/posts";
-import ArrowIcon from "../svgs/ArrowIcon";
-import TeaIcon from "../svgs/TeaIcon";
-import Subheading from "../typography/Subheading";
-import PendingComment from "./moderation/PendingComment";
+import PendingComment from "./PendingComment";
 
-type AdminDashboardProps = {
+type CommentModerationProps = {
 	pendingComments: Comment[] | null;
 };
 
-// TODO: workout what to put here!
-export default function AdminDashboard({
+export default function CommentModeration({
 	pendingComments,
-}: AdminDashboardProps) {
+}: CommentModerationProps) {
 	const [pendingCommentsState, setPendingCommentsState] = useState<
 		Comment[] | null
 	>(null);
@@ -57,12 +57,17 @@ export default function AdminDashboard({
 			<div className="bg-white/50 p-8 rounded-lg shadow-sm border border-gray-200 w-full sm:w-2xl">
 				<Subheading text="Moderate Comments" className="mb-8" />
 				<div className="space-y-8">
-					{pendingCommentsState?.map((comment) => (
-						<PendingComment
-							key={comment._id as string}
-							comment={comment}
-							updatePendingComments={updateComments}
-						/>
+					{pendingCommentsState?.map((comment, index) => (
+						<>
+							<PendingComment
+								key={comment._id as string}
+								comment={comment}
+								updatePendingComments={updateComments}
+							/>
+							{index !== pendingCommentsState.length - 1 && (
+								<ThematicBreak className="border-gray-200" />
+							)}
+						</>
 					))}
 				</div>
 			</div>
