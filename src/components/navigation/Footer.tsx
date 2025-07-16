@@ -3,7 +3,10 @@ export default function Footer() {
 
 	return (
 		<footer className="bottom-0 flex flex-col items-center justify-center w-full p-4">
-			<p className="text-center text-[12px] font-display text-classy-mauve mb-2">
+			<p
+				className="text-center text-[12px] font-display text-classy-mauve mb-2"
+				suppressHydrationWarning={true}
+			>
 				© Wendi Coles {currentYear}
 			</p>
 			<a

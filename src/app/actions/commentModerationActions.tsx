@@ -59,9 +59,16 @@ export async function rejectComment({
 		const db = client.db(process.env.MONGO_DB_NAME);
 		const commentCollection = db.collection("comments");
 
-		await commentCollection.deleteOne({
-			_id: new ObjectId(commentId),
-		});
+		await commentCollection.updateOne(
+			{
+				_id: new ObjectId(commentId),
+			},
+			{
+				$set: {
+					status: "rejected",
+				},
+			},
+		);
 
 		return {
 			success: true,
