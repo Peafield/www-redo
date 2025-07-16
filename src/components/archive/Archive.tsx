@@ -4,7 +4,6 @@ import { useState, useTransition } from "react";
 import { fetchArchivePosts } from "@/app/actions/fetchArchivePosts";
 import type { PaginatedPostsResponse } from "@/types/api";
 import BottomNav from "../navigation/BottomNav";
-import ChevronDownIcon from "../svgs/ChevronDownIcon";
 import Subheading from "../typography/Subheading";
 import ArchivePoemCard from "./ArchivePoemCard";
 
