@@ -1,6 +1,26 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useActionState, useEffect } from "react";
+import adminLogin from "@/app/actions/adminLogin";
 import PrimaryButton from "../buttons/PrimaryButton";
 
 export default function Login() {
+	const router = useRouter();
+	const [loginState, submitAction, isPending] = useActionState(
+		adminLogin,
+		null,
+	);
+	const formAction = (formData: FormData) => {
+		submitAction(formData);
+	};
+
+	useEffect(() => {
+		if (loginState?.success) {
+			router.push("/admin/new-poem");
+		}
+	}, [loginState, router]);
+
 	return (
 		<section className="flex-grow flex items-center justify-center">
 			<div className="container mx-auto px-4 py-16">
@@ -14,7 +34,7 @@ export default function Login() {
 						</p>
 					</header>
 					<div className="bg-white/50 p-8 rounded-lg shadow-sm border border-gray-200">
-						<form className="space-y-6">
+						<form action={formAction} className="space-y-6">
 							<div>
 								<label
 									htmlFor="username"
@@ -51,11 +71,16 @@ export default function Login() {
 							</div>
 							<div>
 								<PrimaryButton
-									title="Login"
+									title={isPending ? "Logging in..." : "Login"}
 									type="submit"
 									className="w-full inline-flex justify-center items-center "
 								/>
 							</div>
+							{loginState?.error && (
+								<p className="font-serif font-bold text-sm text-classy-mauve">
+									Invalid username or password
+								</p>
+							)}
 						</form>
 					</div>
 				</div>
