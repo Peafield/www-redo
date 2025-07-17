@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRef, useState } from "react";
 import { useClickAway } from "react-use";
+import adminLogout from "@/app/actions/adminLogout";
 import { cn } from "@/utils/cn";
 import CloseIcon from "../svgs/CloseIcon";
 import MenuIcon from "../svgs/MenuIcon";
@@ -39,7 +40,7 @@ const adminNavLinks: NavLinks = [
 	},
 	{
 		name: "Logout",
-		url: "/admin/logout",
+		url: "/",
 	},
 ];
 
@@ -57,6 +58,10 @@ export default function Navbar({ className }: NavbarProps) {
 	});
 	const handleToggleMenu = () => {
 		setIsMenuOpen((prev) => !prev);
+	};
+	const handleLogout = async () => {
+		await adminLogout();
+		setIsMenuOpen(false);
 	};
 
 	return (
@@ -83,7 +88,9 @@ export default function Navbar({ className }: NavbarProps) {
 							<li key={link.name}>
 								<Link
 									href={link.url}
-									onClick={handleToggleMenu}
+									onClick={
+										link.name === "Logout" ? handleLogout : handleToggleMenu
+									}
 									prefetch
 									className={cn(
 										"text-shady-character text-lg font-serif transform transition-colors duration-100 ease-in-out",
@@ -135,6 +142,7 @@ export default function Navbar({ className }: NavbarProps) {
 								href={link.url}
 								aria-label={`Maps to ${link.name}`}
 								aria-disabled={pathname === link.url}
+								onClick={link.name === "Logout" ? handleLogout : () => {}}
 								prefetch
 								className={cn(
 									"text-shady-character text-lg font-serif transform transition-colors duration-100 ease-in-out hover:text-classy-mauve",

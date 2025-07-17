@@ -11,7 +11,7 @@ export default async function adminLogin(
 	const username = formData.get("username");
 	const password = formData.get("password");
 	try {
-		const response = await fetch("/api/auth", {
+		const response = await fetch("/api/auth/login", {
 			method: "POST",
 			body: JSON.stringify({ username, password }),
 			headers: {

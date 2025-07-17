@@ -1,9 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useActionState, useEffect } from "react";
 import adminLogin from "@/app/actions/adminLogin";
-import PrimaryButton from "../buttons/PrimaryButton";
+import PrimaryButton from "../../buttons/PrimaryButton";
+import ArrowIcon from "../../svgs/ArrowIcon";
 
 export default function Login() {
 	const router = useRouter();
@@ -82,6 +84,16 @@ export default function Login() {
 								</p>
 							)}
 						</form>
+					</div>
+					<div className="mt-8 text-center font-serif text-sm text-shady-character hover:text-classy-mauve cursor-pointer transition-colors duration-200 ease-in-out">
+						<Link
+							href={"/"}
+							replace
+							className="flex items-center justify-center"
+						>
+							Go back to homepage
+							<ArrowIcon className="size-3 ml-2" />
+						</Link>
 					</div>
 				</div>
 			</div>
