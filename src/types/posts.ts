@@ -3,8 +3,8 @@ import { z } from "zod";
 
 // Base Post schema
 const PostBaseSchema = z.object({
-	title: z.string(),
-	content: z.string(),
+	title: z.string().min(1, { message: "Title is required." }),
+	content: z.string().min(1, { message: "Content cannot be empty." }),
 	date: z.string(),
 	created_at: z.string(),
 });

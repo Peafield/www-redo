@@ -18,7 +18,7 @@ export default function HomeLatest({
 	const imageUrl = `/api/image/${encodeURIComponent(src)}`;
 	return (
 		<section className="group w-full h-full flex flex-col">
-			<Subheading text={"Lastest Poem"} />
+			<Subheading text={"Lastest Poem"} className="sm:text-center" />
 			<div className="flex flex-col items-center justify-center gap-4">
 				<Link
 					href={`/poem/${id}`}
