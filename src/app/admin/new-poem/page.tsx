@@ -1,5 +1,5 @@
-// TODO: Complete this page
+import PoemEditor from "@/components/admin/poem/editor/PoemEditor";
 
 export default function NewPoemPage() {
-	return <h1>New Poem Page</h1>;
+	return <PoemEditor />;
 }

@@ -37,7 +37,7 @@ export const PostSchema = PostInsertSchema.extend({
 export type Post = z.infer<typeof PostSchema>;
 
 // Post Update schema
-export const PostUpdateSchema = PostBaseSchema.partial()
+export const PostEditSchema = PostBaseSchema.partial()
 	.merge(PostInsertSchema.partial())
 	.merge(PostCreationSchema.partial())
 	.extend({
@@ -45,7 +45,7 @@ export const PostUpdateSchema = PostBaseSchema.partial()
 	});
 
 // Post update type
-export type PostUpdate = z.infer<typeof PostUpdateSchema>;
+export type PostEdit = z.infer<typeof PostEditSchema>;
 
 // Post array schema
 export const PostArraySchema = z.array(PostSchema);
