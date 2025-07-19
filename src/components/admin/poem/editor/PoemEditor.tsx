@@ -1,32 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useActionState } from "react";
+import { adminSavePoemAction } from "@/app/actions/adminSavePoemAction";
 import type { PostEdit } from "@/types/posts";
 import TextEditor from "./TextEditor";
 
-export default function PoemEditor() {
-	const [post, setPost] = useState<PostEdit>({
-		_id: "",
-		title: "",
-		content: "",
-	});
-	console.log(post);
-	const [isSaving, setIsSaving] = useState(false);
+interface PoemEditorProps {
+	initialPost?: PostEdit;
+}
 
-	const handleSavePoem = async () => {
-		setIsSaving(true);
-		console.log("Saving post:", post);
-		await new Promise((resolve) => setTimeout(resolve, 1000));
-		setIsSaving(false);
-	};
+export default function PoemEditor({ initialPost }: PoemEditorProps) {
+	const [savePoemState, formAction, isPending] = useActionState(
+		adminSavePoemAction,
+		null,
+	);
 
 	return (
 		<div className="h-screen flex items-center justify-center">
 			<TextEditor
-				post={post}
-				onChange={setPost}
-				handleSave={handleSavePoem}
-				disabled={isSaving}
+				post={initialPost || { _id: "", title: "", content: "" }}
+				formAction={formAction}
+				savePoemState={savePoemState}
+				disabled={isPending}
 			/>
 		</div>
 	);

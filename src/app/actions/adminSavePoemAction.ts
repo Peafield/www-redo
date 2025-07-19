@@ -1,9 +1,10 @@
-import nlp from "compromise";
-import { htmlToText } from "html-to-text";
+"use server";
+
 import sharp from "sharp";
 import clientPromise from "@/lib/mongodb";
 import { uploadImageToR2 } from "@/lib/r2";
 import { PostCreationSchema, type PostInsert } from "@/types/posts";
+import { getPreviewText } from "@/utils/getPreviewText";
 
 type AdminSavePoemActionResult = {
 	success: boolean;
@@ -16,7 +17,6 @@ type AdminSavePoemActionResult = {
 	error?: string;
 };
 
-// TODO: Review and test!
 export async function processAndSaveImage(imageBlob: Blob, title: string) {
 	try {
 		const buffer = Buffer.from(await imageBlob.arrayBuffer());
@@ -37,17 +37,6 @@ export async function processAndSaveImage(imageBlob: Blob, title: string) {
 			error: errorMessage,
 		};
 	}
-}
-
-export function getPreviewText(rawHtml: string): string {
-	const text = htmlToText(rawHtml || "", {
-		wordwrap: false,
-	});
-	const doc = nlp(text);
-	const firstSentence = doc.sentences().first().text();
-	const cleanSentence = firstSentence.replace(/[.,!?;:]$/, "");
-
-	return `${cleanSentence}...`;
 }
 
 export async function adminSavePoemAction(
@@ -88,7 +77,11 @@ export async function adminSavePoemAction(
 			title,
 			content,
 			image_url: fileNameAfterUpload as string,
-			date: new Date().toISOString(),
+			date: new Date().toLocaleDateString("en-GB", {
+				day: "numeric",
+				month: "short",
+				year: "numeric",
+			}),
 			created_at: new Date().toISOString(),
 			preview_text: previewText,
 		};

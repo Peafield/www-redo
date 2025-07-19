@@ -6,16 +6,26 @@ import TextAlign from "@tiptap/extension-text-align";
 import Underline from "@tiptap/extension-underline";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { useDebouncedCallback } from "use-debounce";
+import { useEffect, useState } from "react";
 import { PhotoUploadIcon, SaveIcon } from "@/components/svgs/toolbarIcons";
 import type { PostEdit } from "@/types/posts";
 import PoemEditorImage from "./PoemEditorImage";
 import { Toolbar } from "./Toolbar";
 
+type SavePoemState = {
+	success?: boolean;
+	errors?: {
+		title?: string[];
+		content?: string[];
+		image?: string[];
+	};
+	message?: string;
+} | null;
+
 interface TextEditorProps {
 	post: PostEdit;
-	onChange: (updatedPost: PostEdit) => void;
-	handleSave: () => void;
+	savePoemState: SavePoemState;
+	formAction: (payload: FormData) => void;
 	disabled: boolean;
 }
 
@@ -29,13 +39,14 @@ const CustomHardBreak = HardBreak.extend({
 
 export default function TextEditor({
 	post,
-	handleSave,
-	onChange,
+	formAction,
+	savePoemState,
 	disabled,
 }: TextEditorProps) {
-	const debouncedOnChange = useDebouncedCallback((newContent: string) => {
-		onChange({ ...post, content: newContent });
-	}, 300);
+	const [content, setContent] = useState(post.content || "");
+	const [imagePreview, setImagePreview] = useState<string | Blob | null>(
+		post.image_url || post.image || null,
+	);
 
 	const editor = useEditor({
 		extensions: [
@@ -45,10 +56,10 @@ export default function TextEditor({
 			TextAlign.configure({ types: ["heading", "paragraph"] }),
 			Placeholder.configure({ placeholder: "Write your poem here..." }),
 		],
-		content: post.content,
+		content: content,
 		immediatelyRender: false,
 		onUpdate: ({ editor }) => {
-			debouncedOnChange(editor.getHTML());
+			setContent(editor.getHTML());
 		},
 		editorProps: {
 			attributes: {
@@ -57,12 +68,22 @@ export default function TextEditor({
 		},
 	});
 
+	// TODO: clear data on success, show success mesage/show error message!
+	useEffect(() => {
+		if (savePoemState?.success && savePoemState.message) {
+			alert(savePoemState.message);
+		}
+	}, [savePoemState]);
+
 	return (
-		<div className="h-full w-full sm:w-2/3 flex flex-col gap-4 p-4">
+		<form
+			action={formAction}
+			className="h-full w-full sm:w-2/3 flex flex-col gap-4 p-4"
+		>
 			<div className="flex flex-col items-stretch gap-4">
-				{(post.image_url || post.image) && (
+				{imagePreview && (
 					<div className="w-full flex items-center justify-center">
-						<PoemEditorImage imageSrc={post.image_url || post.image} />
+						<PoemEditorImage imageSrc={imagePreview} />
 					</div>
 				)}
 				<div className="flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -79,22 +100,24 @@ export default function TextEditor({
 						</label>
 						<input
 							id="fileInput"
+							name="image"
 							type="file"
 							accept="image/*"
 							className="hidden"
-							onChange={(e) =>
-								onChange({ ...(post as PostEdit), image: e.target.files?.[0] })
-							}
+							onChange={(e) => {
+								const file = e.target.files?.[0];
+								if (file) {
+									setImagePreview(file);
+								}
+							}}
 						/>
 						<button
 							type="submit"
-							onClick={handleSave}
 							disabled={disabled}
-							className="inline-flex items-center p-2 border border-transparent text-base font-medium rounded-md shadow-sm font-serif text-pink-lemonade bg-shady-character hover:bg-classy-mauve focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-classy-mauve cursor-pointer transition-colors duration-300 ease-in-out"
+							className="inline-flex items-center p-2 border border-transparent text-base font-medium rounded-md shadow-sm font-serif text-pink-lemonade bg-shady-character hover:bg-classy-mauve focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-classy-mauve cursor-pointer transition-colors duration-300 ease-in-out disabled:opacity-50"
 						>
 							<SaveIcon className="size-5" />
 							<span className="ml-2 text-sm font-medium">
-								{" "}
 								{disabled ? "Saving..." : "Save Poem"}
 							</span>
 						</button>
@@ -105,17 +128,26 @@ export default function TextEditor({
 
 			<input
 				type="text"
-				value={post.title}
-				onChange={(e) =>
-					onChange({ ...(post as PostEdit), title: e.target.value })
-				}
+				defaultValue={post.title}
+				name="title"
 				placeholder="Poem title"
 				className="block w-full font-serif placeholder:text-shady-character/50 text-xl p-4 rounded-md border-shady-character shadow-sm focus:border-classy-mauve focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-classy-mauve bg-white/50"
 			/>
+			{savePoemState?.errors?.title && (
+				<p className="text-red-500 text-sm">{savePoemState.errors.title[0]}</p>
+			)}
+
+			<input type="hidden" name="content" value={content} />
 
 			<div className="flex-1 overflow-y-auto block font-serif text-shady-character/50 p-4 rounded-md border-shady-character shadow-sm focus:border-classy-mauve focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-classy-mauve bg-white/50">
 				<EditorContent editor={editor} />
 			</div>
-		</div>
+
+			{savePoemState?.errors?.content && (
+				<p className="text-red-500 text-sm">
+					{savePoemState.errors.content[0]}
+				</p>
+			)}
+		</form>
 	);
 }
