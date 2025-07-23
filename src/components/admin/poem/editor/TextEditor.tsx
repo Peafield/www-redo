@@ -6,7 +6,7 @@ import TextAlign from "@tiptap/extension-text-align";
 import Underline from "@tiptap/extension-underline";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { PhotoUploadIcon, SaveIcon } from "@/components/svgs/toolbarIcons";
 import type { PostEdit } from "@/types/posts";
 import PoemEditorImage from "./PoemEditorImage";
@@ -49,7 +49,6 @@ export default function TextEditor({
 	const [imagePreview, setImagePreview] = useState<string | Blob | null>(
 		post.image_url || post.image || null,
 	);
-	const [formKey, setFormKey] = useState(0);
 
 	const editor = useEditor({
 		extensions: [
@@ -71,15 +70,8 @@ export default function TextEditor({
 		},
 	});
 
-	useEffect(() => {
-		if (savePoemState?.success && savePoemState.message) {
-			setFormKey((prevKey) => prevKey + 1);
-		}
-	}, [savePoemState]);
-
 	return (
 		<form
-			key={formKey}
 			action={formAction}
 			className="h-full w-full sm:w-2/3 flex flex-col gap-4 p-4"
 		>
@@ -130,8 +122,8 @@ export default function TextEditor({
 			</div>
 
 			<input
-				type="text"
-				defaultValue={title}
+				value={title}
+				onChange={(e) => setTitle(e.target.value)}
 				name="title"
 				placeholder="Poem title"
 				className="block w-full font-serif placeholder:text-shady-character/50 text-xl p-4 rounded-md border-shady-character shadow-sm focus:border-classy-mauve focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-classy-mauve bg-white/50"

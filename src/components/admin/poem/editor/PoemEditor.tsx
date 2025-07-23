@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { adminSavePoemAction } from "@/app/actions/adminSavePoemAction";
 import type { PostEdit } from "@/types/posts";
 import TextEditor from "./TextEditor";
@@ -15,9 +15,19 @@ export default function PoemEditor({ initialPost }: PoemEditorProps) {
 		null,
 	);
 
+	const [formKey, setFormKey] = useState(0);
+
+	useEffect(() => {
+		if (savePoemState?.success) {
+			alert(savePoemState.message || "Poem saved successfully!");
+			setFormKey((prevKey) => prevKey + 1);
+		}
+	}, [savePoemState]);
+
 	return (
 		<div className="h-screen flex items-center justify-center">
 			<TextEditor
+				key={formKey}
 				post={initialPost || { _id: "", title: "", content: "" }}
 				formAction={formAction}
 				savePoemState={savePoemState}

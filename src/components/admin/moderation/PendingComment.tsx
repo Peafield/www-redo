@@ -1,3 +1,5 @@
+"use client";
+
 import { formatDistanceToNow } from "date-fns";
 import { useState } from "react";
 import {
@@ -7,7 +9,6 @@ import {
 import Modal from "@/components/modal/Modal";
 import DeleteIcon from "@/components/svgs/DeleteIcon";
 import TickIcon from "@/components/svgs/TickIcon";
-import ThematicBreak from "@/components/visuals/ThematicBreak";
 import type { CommentModerationModal } from "@/types/components";
 import type { Comment } from "@/types/posts";
 
