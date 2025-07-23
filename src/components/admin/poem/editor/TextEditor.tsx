@@ -43,7 +43,6 @@ export default function TextEditor({
 	savePoemState,
 	disabled,
 }: TextEditorProps) {
-	console.log("savepoemsatate:", savePoemState);
 	const [title, setTitle] = useState(post.title || "");
 	const [content, setContent] = useState(post.content || "");
 	const [imagePreview, setImagePreview] = useState<string | Blob | null>(
@@ -133,6 +132,9 @@ export default function TextEditor({
 			)}
 
 			<input type="hidden" name="content" value={content} />
+			{post._id && (
+				<input type="hidden" name="_id" value={post._id as string} />
+			)}
 
 			<div className="flex-1 overflow-y-auto block font-serif text-shady-character/50 p-4 rounded-md border-shady-character shadow-sm focus:border-classy-mauve focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-classy-mauve bg-white/50">
 				<EditorContent editor={editor} />

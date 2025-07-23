@@ -24,7 +24,14 @@ export async function adminGetPoemByIdToEdit(
 			return null;
 		}
 
-		return poemToEdit;
+		const { _id, ...rest } = poemToEdit;
+
+		const serializablePoem = {
+			...rest,
+			_id: _id.toString(),
+		};
+
+		return serializablePoem;
 	} catch (error) {
 		if (process.env.NODE_ENV === "development") {
 			console.error("Error fetching poem by ID:", error);

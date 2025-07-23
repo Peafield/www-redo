@@ -41,11 +41,18 @@ export const PostEditSchema = PostBaseSchema.partial()
 	.merge(PostInsertSchema.partial())
 	.merge(PostCreationSchema.partial())
 	.extend({
-		_id: ObjectIdSchema,
+		_id: ObjectIdSchema.optional(),
 	});
 
 // Post update type
 export type PostEdit = z.infer<typeof PostEditSchema>;
+
+export const PostUpdateValidationSchema = z.object({
+	_id: z.string().min(1, { message: "Post ID is required for an update." }),
+	title: z.string().min(1, { message: "Title is required." }),
+	content: z.string().min(1, { message: "Content cannot be empty." }),
+	image: z.instanceof(Blob).optional(),
+});
 
 // Post array schema
 export const PostArraySchema = z.array(PostSchema);

@@ -19,7 +19,9 @@ export async function middleware(req: NextRequest) {
 		await jwtVerify(token, secretKey);
 		return NextResponse.next();
 	} catch (err) {
-		console.log("Verification failed. Redirecting to /admin.", err);
+		if (process.env.NODE_ENV === "development") {
+			console.error("Verification failed. Redirecting to /admin.", err);
+		}
 		return NextResponse.redirect(new URL("/admin", req.url));
 	}
 }

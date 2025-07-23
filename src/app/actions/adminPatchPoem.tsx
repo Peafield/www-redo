@@ -2,7 +2,7 @@
 
 import { ObjectId } from "mongodb";
 import clientPromise from "@/lib/mongodb";
-import type { Post, PostEdit } from "@/types/posts";
+import type { Post } from "@/types/posts";
 
 export async function adminPatchPoem(
 	id: string,
