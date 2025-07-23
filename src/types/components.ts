@@ -9,11 +9,3 @@ export interface CommentModerationModal {
 	children: string;
 	buttonClick: () => Promise<void>;
 }
-
-export interface NewPoemModal {
-	type: "success" | "failure";
-	title: string;
-	buttonTitle: string;
-	children: string;
-	primaryButtonClick: () => void;
-}

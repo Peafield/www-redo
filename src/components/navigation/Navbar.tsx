@@ -31,11 +31,15 @@ const baseNavLinks: NavLinks = [
 
 const adminNavLinks: NavLinks = [
 	{
+		name: "Manage Poems",
+		url: "/admin",
+	},
+	{
 		name: "New poem",
 		url: "/admin/new-poem",
 	},
 	{
-		name: "Moderation",
+		name: "Comment Moderation",
 		url: "/admin/moderation",
 	},
 	{
@@ -51,6 +55,7 @@ export default function Navbar({ className }: NavbarProps) {
 	const navbarTitle = isAdmin
 		? "Admin Dashboard"
 		: "Wendi's Worminghall Whimsies";
+	const navbarTitleLink = isAdmin ? "/admin" : "/";
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const navRef = useRef<HTMLDivElement>(null);
 	useClickAway(navRef, () => {
@@ -104,7 +109,7 @@ export default function Navbar({ className }: NavbarProps) {
 							</li>
 						))}
 					</ul>
-					<Link href={"/"}>
+					<Link href={navbarTitleLink}>
 						<h1
 							className={cn(
 								"text-center text-xl transition-opacity duration-300 ease-in-out",
@@ -120,7 +125,7 @@ export default function Navbar({ className }: NavbarProps) {
 				</div>
 
 				{/* Desktop */}
-				<Link href={"/"}>
+				<Link href={navbarTitleLink}>
 					<h1 className="hidden sm:block sm:text-xl transform transition-colors duration-100 ease-in-out hover:text-classy-mauve">
 						{navbarTitle}
 					</h1>

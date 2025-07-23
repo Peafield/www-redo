@@ -19,7 +19,7 @@ export default function Login() {
 
 	useEffect(() => {
 		if (loginState?.success) {
-			router.push("/admin/new-poem");
+			router.refresh();
 		}
 	}, [loginState, router]);
 
