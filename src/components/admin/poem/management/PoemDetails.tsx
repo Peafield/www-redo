@@ -1,6 +1,7 @@
 "use client";
 
 import { formatDistanceToNow } from "date-fns/formatDistanceToNow";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import adminDeletePoem from "@/app/actions/adminDeletePoem";
 import Modal from "@/components/modal/Modal";
@@ -14,6 +15,7 @@ type PoemDetailsProps = {
 };
 
 export default function PoemDetails({ poem, updatePosts }: PoemDetailsProps) {
+	const router = useRouter();
 	const [showModal, setShowModal] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const timeAgo = formatDistanceToNow(new Date(poem.date), {
@@ -22,6 +24,10 @@ export default function PoemDetails({ poem, updatePosts }: PoemDetailsProps) {
 
 	const closeModal = () => {
 		setShowModal(false);
+	};
+
+	const handleEditPoem = () => {
+		router.push(`/admin/new-poem/?id=${poem._id}`);
 	};
 
 	const handleDeletePoem = async () => {
@@ -57,7 +63,7 @@ export default function PoemDetails({ poem, updatePosts }: PoemDetailsProps) {
 					<button
 						type="button"
 						className="p-2 rounded-full hover:bg-green-100 cursor-pointer"
-						onClick={() => setShowModal(true)}
+						onClick={handleEditPoem}
 					>
 						<EditIcon className="size-4 text-green-600" />
 					</button>

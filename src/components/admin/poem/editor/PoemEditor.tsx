@@ -6,8 +6,10 @@ import type { PostEdit } from "@/types/posts";
 import TextEditor from "./TextEditor";
 
 interface PoemEditorProps {
-	initialPost?: PostEdit;
+	initialPost: PostEdit | null;
 }
+
+// TODO: update adminSavePoemAction to both save new or patch existing poem
 
 export default function PoemEditor({ initialPost }: PoemEditorProps) {
 	const [savePoemState, formAction, isPending] = useActionState(
