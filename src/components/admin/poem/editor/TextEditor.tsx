@@ -43,10 +43,13 @@ export default function TextEditor({
 	savePoemState,
 	disabled,
 }: TextEditorProps) {
+	console.log("savepoemsatate:", savePoemState);
+	const [title, setTitle] = useState(post.title || "");
 	const [content, setContent] = useState(post.content || "");
 	const [imagePreview, setImagePreview] = useState<string | Blob | null>(
 		post.image_url || post.image || null,
 	);
+	const [formKey, setFormKey] = useState(0);
 
 	const editor = useEditor({
 		extensions: [
@@ -68,15 +71,15 @@ export default function TextEditor({
 		},
 	});
 
-	// TODO: clear data on success, show success mesage/show error message!
 	useEffect(() => {
 		if (savePoemState?.success && savePoemState.message) {
-			alert(savePoemState.message);
+			setFormKey((prevKey) => prevKey + 1);
 		}
 	}, [savePoemState]);
 
 	return (
 		<form
+			key={formKey}
 			action={formAction}
 			className="h-full w-full sm:w-2/3 flex flex-col gap-4 p-4"
 		>
@@ -128,7 +131,7 @@ export default function TextEditor({
 
 			<input
 				type="text"
-				defaultValue={post.title}
+				defaultValue={title}
 				name="title"
 				placeholder="Poem title"
 				className="block w-full font-serif placeholder:text-shady-character/50 text-xl p-4 rounded-md border-shady-character shadow-sm focus:border-classy-mauve focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-classy-mauve bg-white/50"

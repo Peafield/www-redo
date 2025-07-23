@@ -58,7 +58,7 @@ export default function CommentModeration({
 				<Subheading text="Moderate Comments" className="mb-8" />
 				<div className="space-y-8">
 					{pendingCommentsState?.map((comment, index) => (
-						<>
+						<div key={comment._id as string}>
 							<PendingComment
 								key={comment._id as string}
 								comment={comment}
@@ -67,7 +67,7 @@ export default function CommentModeration({
 							{index !== pendingCommentsState.length - 1 && (
 								<ThematicBreak className="border-gray-200" />
 							)}
-						</>
+						</div>
 					))}
 				</div>
 			</div>
