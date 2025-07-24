@@ -1,34 +1,68 @@
-import { type NextRequest, NextResponse } from "next/server";
-import { getImageFromR2 } from "@/lib/r2";
+import {
+	GetObjectCommand,
+	PutObjectCommand,
+	S3Client,
+} from "@aws-sdk/client-s3";
 
-export const dynamic = "force-dynamic";
+let r2Client: S3Client | null = null;
 
-type Context = {
-	params: Promise<{
-		imageName: string;
-	}>;
+const getClient = () => {
+	if (r2Client) {
+		return r2Client;
+	}
+	if (!process.env.R2_ACCESS_KEY_ID || !process.env.R2_SECRET_ACCESS_KEY) {
+		throw new Error(
+			'Invalid/Missing environment variable: "R2_ACCESS_KEY_ID" or "R2_SECRET_ACCESS_KEY"',
+		);
+	}
+
+	r2Client = new S3Client({
+		region: process.env.R2_REGION,
+		endpoint: `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+		credentials: {
+			accessKeyId: process.env.R2_ACCESS_KEY_ID,
+			secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
+		},
+	});
+
+	return r2Client;
 };
 
-export async function GET(_request: NextRequest, { params }: Context) {
-	const { imageName } = await params;
-
+export const uploadImageToR2 = async (
+	fileBuffer: Buffer,
+	fileName: string,
+	mimeType: string,
+) => {
+	const client = getClient();
 	try {
-		const r2Response = await getImageFromR2(imageName);
-
-		if (!r2Response?.Body) {
-			return new NextResponse("Image not found", { status: 404 });
-		}
-
-		const stream = r2Response.Body as ReadableStream;
-
-		return new NextResponse(stream, {
-			headers: {
-				"Content-Type": r2Response.ContentType || "application/octet-stream",
-				"Cache-Control": "public, max-age=31536000, immutable",
-			},
+		const command = new PutObjectCommand({
+			Bucket: process.env.R2_BUCKET_NAME,
+			Key: fileName,
+			Body: fileBuffer,
+			ContentType: mimeType,
 		});
+
+		await client.send(command);
+
+		return fileName;
+	} catch (error) {
+		console.error("Error uploading image to R2:", error);
+		throw error;
+	}
+};
+
+export const getImageFromR2 = async (fileName: string) => {
+	const client = getClient();
+	try {
+		const command = new GetObjectCommand({
+			Bucket: process.env.R2_BUCKET_NAME,
+			Key: fileName,
+		});
+
+		const response = await client.send(command);
+		return response;
 	} catch (error) {
 		console.error("Error retrieving image from R2:", error);
-		return new NextResponse("Image not found", { status: 404 });
+		throw error;
 	}
-}
+};
