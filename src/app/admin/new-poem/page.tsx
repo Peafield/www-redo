@@ -2,13 +2,12 @@ import { adminGetPoemByIdToEdit } from "@/app/actions/adminGetPoemByIdToEdit";
 import PoemEditor from "@/components/admin/poem/editor/PoemEditor";
 
 type NewPoemPageProps = {
-	searchParams: {
-		[key: string]: string | string[] | undefined;
-	};
+	params: Promise<{ slug: string }>;
+	searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export default async function NewPoemPage({ searchParams }: NewPoemPageProps) {
-	const id = searchParams.id as string;
+	const id = (await searchParams).id as string;
 
 	if (id) {
 		return <GetPoemToEdit id={id} />;
