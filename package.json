@@ -13,7 +13,6 @@
 		"@aws-sdk/client-s3": "^3.842.0",
 		"@aws-sdk/s3-request-presigner": "^3.842.0",
 		"@next/third-parties": "^15.3.5",
-		"@t3-oss/env-nextjs": "^0.13.8",
 		"@tiptap/extension-hard-break": "^3.0.7",
 		"@tiptap/extension-placeholder": "^3.0.7",
 		"@tiptap/extension-text-align": "^3.0.7",

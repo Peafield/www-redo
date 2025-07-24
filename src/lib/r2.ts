@@ -3,20 +3,19 @@ import {
 	PutObjectCommand,
 	S3Client,
 } from "@aws-sdk/client-s3";
-import { env } from "@/env";
 
-if (!env.R2_ACCESS_KEY_ID || !env.R2_SECRET_ACCESS_KEY) {
+if (!process.env.R2_ACCESS_KEY_ID || !process.env.R2_SECRET_ACCESS_KEY) {
 	throw new Error(
 		'Invalid/Missing environment variable: "R2_ACCESS_KEY_ID" or "R2_SECRET_ACCESS_KEY"',
 	);
 }
 
 const r2Client = new S3Client({
-	region: env.R2_REGION,
-	endpoint: `https://${env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+	region: process.env.R2_REGION,
+	endpoint: `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
 	credentials: {
-		accessKeyId: env.R2_ACCESS_KEY_ID,
-		secretAccessKey: env.R2_SECRET_ACCESS_KEY,
+		accessKeyId: process.env.R2_ACCESS_KEY_ID,
+		secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
 	},
 });
 
@@ -27,7 +26,7 @@ export const uploadImageToR2 = async (
 ) => {
 	try {
 		const command = new PutObjectCommand({
-			Bucket: env.R2_BUCKET_NAME,
+			Bucket: process.env.R2_BUCKET_NAME,
 			Key: fileName,
 			Body: fileBuffer,
 			ContentType: mimeType,
@@ -45,7 +44,7 @@ export const uploadImageToR2 = async (
 export const getImageFromR2 = async (fileName: string) => {
 	try {
 		const command = new GetObjectCommand({
-			Bucket: env.R2_BUCKET_NAME,
+			Bucket: process.env.R2_BUCKET_NAME,
 			Key: fileName,
 		});
 

@@ -1,5 +1,3 @@
-import { env } from "@/env";
-
 type AdminLoginActionResult = {
 	success: boolean;
 	message?: string;
@@ -26,7 +24,7 @@ export default async function adminLogin(
 		}
 		return { success: true };
 	} catch (error) {
-		if (env.NODE_ENV === "development") {
+		if (process.env.NODE_ENV === "development") {
 			console.error("Error logging in admin:", error);
 		}
 		return {

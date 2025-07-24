@@ -1,13 +1,15 @@
 import { MongoClient } from "mongodb";
-import { env } from "@/env";
 
-const uri = env.MONGODB_URI;
+const uri = process.env.MONGODB_URI;
+if (!uri) {
+	throw new Error("Invalid/Missing environment variable: MONGODB_URI");
+}
 const options = { appName: "Wendi's Worminghall Whimsies" };
 
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
 
-if (env.NODE_ENV === "development") {
+if (process.env.NODE_ENV === "development") {
 	// In development mode, use a global variable to preserve the value
 	// across module reloads caused by HMR (Hot Module Replacement).
 	const globalWithMongo = global as typeof globalThis & {

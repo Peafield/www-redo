@@ -1,13 +1,12 @@
 "use server";
 
-import { env } from "@/env";
 import clientPromise from "@/lib/mongodb";
 import { type Comment, CommentArraySchema } from "@/types/posts";
 
 export async function getPendingComments() {
 	try {
 		const client = await clientPromise;
-		const db = client.db(env.MONGO_DB_NAME);
+		const db = client.db(process.env.MONGO_DB_NAME);
 		const commentCollection = db.collection("comments");
 
 		const pendingCommentsData = await commentCollection
@@ -36,7 +35,7 @@ export async function getPendingComments() {
 
 		return pendingComments;
 	} catch (error) {
-		if (env.NODE_ENV === "development") {
+		if (process.env.NODE_ENV === "development") {
 			console.error("Error fetching pending poem comments:", error);
 		}
 		return null;

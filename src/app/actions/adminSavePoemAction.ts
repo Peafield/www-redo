@@ -2,7 +2,7 @@
 
 import { ObjectId } from "mongodb";
 import sharp from "sharp";
-import { env } from "@/env";
+
 import clientPromise from "@/lib/mongodb";
 import { uploadImageToR2 } from "@/lib/r2";
 import {
@@ -93,7 +93,7 @@ export async function adminSavePoemAction(
 		};
 
 		const client = await clientPromise;
-		const db = client.db(env.MONGO_DB_NAME);
+		const db = client.db(process.env.MONGO_DB_NAME);
 		const postCollection = db.collection<PostInsert>("posts");
 
 		const result = await postCollection.insertOne(finalFormattedPost);
@@ -113,7 +113,7 @@ export async function adminSavePoemAction(
 			success: true,
 		};
 	} catch (error) {
-		if (env.NODE_ENV === "development") {
+		if (process.env.NODE_ENV === "development") {
 			console.error("Error submitting comment:", error);
 		}
 		return {
@@ -165,7 +165,7 @@ export async function adminPatchPoemAction(
 		}
 
 		const client = await clientPromise;
-		const db = client.db(env.MONGO_DB_NAME);
+		const db = client.db(process.env.MONGO_DB_NAME);
 		const postCollection = db.collection<PostInsert>("posts");
 
 		const result = await postCollection.updateOne(
@@ -186,7 +186,7 @@ export async function adminPatchPoemAction(
 			message: "Poem updated successfully!",
 		};
 	} catch (error) {
-		if (env.NODE_ENV === "development") {
+		if (process.env.NODE_ENV === "development") {
 			console.error("Error updating poem:", error);
 		}
 		return {

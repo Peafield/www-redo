@@ -11,6 +11,8 @@ RUN bun install --frozen-lockfile
 FROM oven/bun:1 AS builder
 WORKDIR /app
 
+ENV NODE_ENV production
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/bun.lock ./bun.lock
 COPY --from=deps /app/package.json ./package.json

@@ -1,6 +1,5 @@
 "use server";
 
-import { env } from "@/env";
 import clientPromise from "@/lib/mongodb";
 import type { PaginatedPostsResponse } from "@/types/api";
 import type { Post } from "@/types/posts";
@@ -11,7 +10,7 @@ export async function fetchArchivePosts({
 }): Promise<PaginatedPostsResponse | null> {
 	try {
 		const client = await clientPromise;
-		const db = client.db(env.MONGO_DB_NAME);
+		const db = client.db(process.env.MONGO_DB_NAME);
 		const postsCollection = db.collection<Post>("posts");
 
 		const skip = (page - 1) * limit;

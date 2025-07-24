@@ -1,7 +1,7 @@
 "use server";
 
 import { ObjectId } from "mongodb";
-import { env } from "@/env";
+
 import clientPromise from "@/lib/mongodb";
 
 type CommentModerationActionResult = {
@@ -19,7 +19,7 @@ export async function approveComment({
 }: ApproveCommentProps): Promise<CommentModerationActionResult> {
 	try {
 		const client = await clientPromise;
-		const db = client.db(env.MONGO_DB_NAME);
+		const db = client.db(process.env.MONGO_DB_NAME);
 		const commentCollection = db.collection("comments");
 
 		await commentCollection.updateOne(
@@ -37,7 +37,7 @@ export async function approveComment({
 			success: true,
 		};
 	} catch (error) {
-		if (env.NODE_ENV === "development") {
+		if (process.env.NODE_ENV === "development") {
 			console.error("Error approving comment:", error);
 		}
 		return {
@@ -57,7 +57,7 @@ export async function rejectComment({
 }: RejectCommentProps): Promise<CommentModerationActionResult> {
 	try {
 		const client = await clientPromise;
-		const db = client.db(env.MONGO_DB_NAME);
+		const db = client.db(process.env.MONGO_DB_NAME);
 		const commentCollection = db.collection("comments");
 
 		await commentCollection.updateOne(
@@ -75,7 +75,7 @@ export async function rejectComment({
 			success: true,
 		};
 	} catch (error) {
-		if (env.NODE_ENV === "development") {
+		if (process.env.NODE_ENV === "development") {
 			console.error("Error rejecting comment:", error);
 		}
 		return {
