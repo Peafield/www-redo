@@ -17,7 +17,7 @@ COPY --from=deps /app/package.json ./package.json
 
 COPY . .
 
-RUN --mount=type=secret,id=production-secrets source /run/secrets/production-secrets && bun run build
+RUN --mount=type=secret,id=production-secrets . /run/secrets/production-secrets && bun run build
 
 
 # Production image, copy all the files and run next
