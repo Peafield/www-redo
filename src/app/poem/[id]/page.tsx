@@ -5,6 +5,7 @@ import { getPoemById } from "@/app/actions/getPoemById";
 import { getPoemCommentsbyId } from "@/app/actions/getPoemCommentsById";
 import Poem from "@/components/poem/Poem";
 import PoemSkeleton from "@/components/skeletons/PoemSkeleton";
+import { env } from "@/env";
 import type { Comment } from "@/types/posts";
 
 export const dynamic = "force-dynamic";
@@ -27,7 +28,7 @@ export async function generateMetadata({
 			openGraph: {
 				title: `Read my new poem: ${poem.title}`,
 				description: poem.preview_text,
-				url: `${process.env.NEXT_PUBLIC_APP_URL}/poem/${poem._id}`,
+				url: `${env.NEXT_PUBLIC_APP_URL}/poem/${poem._id}`,
 				type: "article",
 				siteName: `Wendi's Worminghall Whimsies`,
 			},

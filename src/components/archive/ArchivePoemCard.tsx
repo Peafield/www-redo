@@ -18,6 +18,7 @@ export default function ArchivePoemCard({ post }: ArchivePoemCardProps) {
 				<Image
 					src={imageUrl}
 					alt={`Image for ${post.title}`}
+					sizes="(max-width: 640px) 100vw, 50vw"
 					fill
 					className="rounded-2xl object-cover shadow-lg"
 				/>

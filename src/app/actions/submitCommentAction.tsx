@@ -1,5 +1,6 @@
 "use server";
 
+import { env } from "@/env";
 import clientPromise from "@/lib/mongodb";
 import { type CommentCreation, CommentCreationSchema } from "@/types/posts";
 
@@ -36,7 +37,7 @@ export async function submitCommentAction(
 	const validatedComment = CommentCreationSchema.safeParse(rawCommentData);
 
 	if (!validatedComment.success) {
-		if (process.env.NODE_ENV === "development") {
+		if (env.NODE_ENV === "development") {
 			console.error("Invalid comment data:", validatedComment.error);
 		}
 		return {
@@ -48,7 +49,7 @@ export async function submitCommentAction(
 
 	try {
 		const client = await clientPromise;
-		const db = client.db(process.env.MONGO_DB_NAME);
+		const db = client.db(env.MONGO_DB_NAME);
 		const commentCollection = db.collection<CommentCreation>("comments");
 
 		const result = await commentCollection.insertOne(validatedComment.data);
@@ -69,7 +70,7 @@ export async function submitCommentAction(
 			success: true,
 		};
 	} catch (error) {
-		if (process.env.NODE_ENV === "development") {
+		if (env.NODE_ENV === "development") {
 			console.error("Error submitting comment:", error);
 		}
 		return {

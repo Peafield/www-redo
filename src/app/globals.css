@@ -2,35 +2,35 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --color-pink-lemonade: oklch(0.9525 0.0243 8.16);
-  --color-shady-character: oklch(0.4091 0 0);
-  --color-classy-mauve: oklch(0.719 0.0493 336.3);
-  --font-display: var(--font-playfair-display);
-  --font-serif: var(--font-newsreader);
-  --animate-fade-out: fade-out 1s ease-in-out forwards;
+	--color-pink-lemonade: oklch(0.9525 0.0243 8.16);
+	--color-shady-character: oklch(0.4091 0 0);
+	--color-classy-mauve: oklch(0.719 0.0493 336.3);
+	--font-display: var(--font-playfair-display);
+	--font-serif: var(--font-newsreader);
+	--animate-fade-out: fade-out 1s ease-in-out forwards;
 
-  @keyframes fade-out {
-    0% {
-      opacity: 100%;
-      transform: translateY(0);
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(-6px);
-    }
-  }
+	@keyframes fade-out {
+		0% {
+			opacity: 100%;
+			transform: translateY(0);
+		}
+		100% {
+			opacity: 0;
+			transform: translateY(-6px);
+		}
+	}
 }
 
 @layer base {
-  :root {
-    @apply bg-pink-lemonade;
-  }
-  h1 {
-    @apply font-display font-bold text-lg tracking-wide text-shady-character;
-  }
+	:root {
+		@apply bg-pink-lemonade;
+	}
+	h1 {
+		@apply font-display font-bold text-lg tracking-wide text-shady-character;
+	}
 
-  .ProseMirror p.is-editor-empty:first-child::before {
-    content: attr(data-placeholder);
-    @apply float-left pointer-events-none h-0 text-shady-character/50 text-xl;
-  }
+	.ProseMirror p.is-editor-empty:first-child::before {
+		content: attr(data-placeholder);
+		@apply float-left pointer-events-none h-0 text-shady-character/50 text-xl;
+	}
 }

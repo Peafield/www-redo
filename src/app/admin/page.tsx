@@ -1,5 +1,4 @@
 import { cookies } from "next/headers";
-import { Suspense } from "react";
 import Login from "@/components/admin/auth/Login";
 import PoemManager from "@/components/admin/poem/management/PoemManager";
 import verifyToken from "@/utils/verifyToken";
@@ -14,17 +13,7 @@ export default async function AdminPage() {
 		isLoggedIn = await verifyToken(token.value);
 	}
 
-	return (
-		<>
-			{isLoggedIn ? (
-				<Suspense fallback={<div>Loading...</div>}>
-					<FetchArchivePosts />
-				</Suspense>
-			) : (
-				<Login />
-			)}
-		</>
-	);
+	return <>{isLoggedIn ? <FetchArchivePosts /> : <Login />}</>;
 }
 
 async function FetchArchivePosts() {

@@ -13,6 +13,7 @@ export default function PoemImage({ imageUrl, title }: PoemImageProps) {
 				src={src}
 				alt={`Image for ${title}`}
 				fill
+				sizes="(max-width: 640px) 100vw, 50vw"
 				className="object-cover rounded-2xl"
 			/>
 			<div

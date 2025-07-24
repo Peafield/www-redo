@@ -1,12 +1,13 @@
 "use server";
 
+import { env } from "@/env";
 import clientPromise from "@/lib/mongodb";
 import { type Comment, CommentArraySchema } from "@/types/posts";
 
 export async function getPoemCommentsbyId(id: string) {
 	try {
 		const client = await clientPromise;
-		const db = client.db(process.env.MONGO_DB_NAME);
+		const db = client.db(env.MONGO_DB_NAME);
 		const commentCollection = db.collection("comments");
 
 		const allPoemComments = await commentCollection
@@ -51,7 +52,7 @@ export async function getPoemCommentsbyId(id: string) {
 		const validatedComments = CommentArraySchema.parse(sortedRootComments);
 		return validatedComments;
 	} catch (error) {
-		if (process.env.NODE_ENV === "development") {
+		if (env.NODE_ENV === "development") {
 			console.error("Error fetching poem comments:", error);
 		}
 		return null;

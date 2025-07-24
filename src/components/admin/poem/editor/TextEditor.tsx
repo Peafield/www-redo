@@ -3,7 +3,6 @@
 import HardBreak from "@tiptap/extension-hard-break";
 import Placeholder from "@tiptap/extension-placeholder";
 import TextAlign from "@tiptap/extension-text-align";
-import Underline from "@tiptap/extension-underline";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { useState } from "react";
@@ -51,8 +50,9 @@ export default function TextEditor({
 
 	const editor = useEditor({
 		extensions: [
-			StarterKit,
-			Underline,
+			StarterKit.configure({
+				hardBreak: false,
+			}),
 			CustomHardBreak,
 			TextAlign.configure({ types: ["heading", "paragraph"] }),
 			Placeholder.configure({ placeholder: "Write your poem here..." }),

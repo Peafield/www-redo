@@ -37,6 +37,7 @@ export function HomeRecentCarousel({
 									src={imageUrl}
 									alt={`Image for ${post.title}`}
 									fill
+									sizes="(max-width: 640px) 100vw, 50vw"
 									className="rounded-2xl object-cover shadow-lg"
 								/>
 							</div>

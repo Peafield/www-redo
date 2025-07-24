@@ -14,6 +14,7 @@ export default function About() {
 						src={"/protrait-of-wendi.jpg"}
 						alt="Portrait picture of Wendi Coles"
 						fill
+						sizes="(max-width: 640px) 100vw, 50vw"
 						className="rounded-full object-cover shadow-xl"
 					/>
 				</div>

@@ -28,6 +28,7 @@ export default function HomeLatest({
 						src={imageUrl}
 						alt={`Image for ${title}`}
 						fill
+						sizes="(max-width: 640px) 100vw, 50vw"
 						className="object-cover rounded-2xl"
 					/>
 					<div
