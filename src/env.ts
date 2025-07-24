@@ -20,8 +20,18 @@ export const env = createEnv({
 	shared: {
 		NODE_ENV: z.enum(["development", "production"]).default("development"),
 	},
-	experimental__runtimeEnv: {
+	runtimeEnv: {
 		NODE_ENV: process.env.NODE_ENV,
 		NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+		MONGODB_URI: process.env.MONGODB_URI,
+		MONGO_DB_NAME: process.env.MONGO_DB_NAME,
+		R2_ACCOUNT_ID: process.env.R2_ACCOUNT_ID,
+		R2_ACCESS_KEY_ID: process.env.R2_ACCESS_KEY_ID,
+		R2_SECRET_ACCESS_KEY: process.env.R2_SECRET_ACCESS_KEY,
+		R2_BUCKET_NAME: process.env.R2_BUCKET_NAME,
+		R2_REGION: process.env.R2_REGION,
+		JWT_SECRET: process.env.JWT_SECRET,
+		ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
+		ADMIN_USERNAME: process.env.ADMIN_USERNAME,
 	},
 });
