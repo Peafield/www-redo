@@ -1,4 +1,6 @@
-import clientPromise from "@/lib/mongodb";
+"use server";
+
+import getClientPromise from "@/lib/mongodb";
 import {
 	type fetchLatestPostsReponse,
 	type Post,
@@ -7,7 +9,7 @@ import {
 
 export async function fetchLatestPosts(): Promise<fetchLatestPostsReponse | null> {
 	try {
-		const client = await clientPromise;
+		const client = await getClientPromise();
 		const db = client.db(process.env.MONGO_DB_NAME);
 		const posts = await db
 			.collection<Post>("posts")

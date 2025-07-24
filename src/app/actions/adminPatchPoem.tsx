@@ -1,8 +1,7 @@
 "use server";
 
 import { ObjectId } from "mongodb";
-
-import clientPromise from "@/lib/mongodb";
+import getClientPromise from "@/lib/mongodb";
 import type { Post, PostEdit } from "@/types/posts";
 
 export async function adminPatchPoem(
@@ -14,7 +13,7 @@ export async function adminPatchPoem(
 	}
 
 	try {
-		const client = await clientPromise;
+		const client = await getClientPromise();
 		const db = client.db(process.env.MONGO_DB_NAME);
 		const postsCollection = db.collection<Post>("posts");
 

@@ -1,8 +1,7 @@
 "use server";
 
 import { ObjectId } from "mongodb";
-
-import clientPromise from "@/lib/mongodb";
+import getClientPromise from "@/lib/mongodb";
 
 type CommentModerationActionResult = {
 	success: boolean;
@@ -18,7 +17,7 @@ export async function approveComment({
 	commentId,
 }: ApproveCommentProps): Promise<CommentModerationActionResult> {
 	try {
-		const client = await clientPromise;
+		const client = await getClientPromise();
 		const db = client.db(process.env.MONGO_DB_NAME);
 		const commentCollection = db.collection("comments");
 
@@ -56,7 +55,7 @@ export async function rejectComment({
 	commentId,
 }: RejectCommentProps): Promise<CommentModerationActionResult> {
 	try {
-		const client = await clientPromise;
+		const client = await getClientPromise();
 		const db = client.db(process.env.MONGO_DB_NAME);
 		const commentCollection = db.collection("comments");
 

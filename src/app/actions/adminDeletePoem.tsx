@@ -1,12 +1,11 @@
 "use server";
 
 import { ObjectId } from "mongodb";
-
-import clientPromise from "@/lib/mongodb";
+import getClientPromise from "@/lib/mongodb";
 
 export default async function deletePoem(poemId: string) {
 	try {
-		const client = await clientPromise;
+		const client = await getClientPromise();
 		const db = client.db(process.env.MONGO_DB_NAME);
 		const postsCollection = db.collection("posts");
 

@@ -1,6 +1,5 @@
 "use server";
-
-import clientPromise from "@/lib/mongodb";
+import getClientPromise from "@/lib/mongodb";
 import { type CommentCreation, CommentCreationSchema } from "@/types/posts";
 
 type SubmitCommentActionResult = {
@@ -47,7 +46,7 @@ export async function submitCommentAction(
 	}
 
 	try {
-		const client = await clientPromise;
+		const client = await getClientPromise();
 		const db = client.db(process.env.MONGO_DB_NAME);
 		const commentCollection = db.collection<CommentCreation>("comments");
 

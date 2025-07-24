@@ -1,8 +1,7 @@
 "use server";
 
 import { ObjectId } from "mongodb";
-
-import clientPromise from "@/lib/mongodb";
+import getClientPromise from "@/lib/mongodb";
 import { type PoemResponse, type Post, PostSchema } from "@/types/posts";
 
 export async function getPoemById(id: string): Promise<PoemResponse | null> {
@@ -11,7 +10,7 @@ export async function getPoemById(id: string): Promise<PoemResponse | null> {
 	}
 
 	try {
-		const client = await clientPromise;
+		const client = await getClientPromise();
 		const db = client.db(process.env.MONGO_DB_NAME);
 		const postsCollection = db.collection<Post>("posts");
 

@@ -1,3 +1,5 @@
+"use server";
+
 type AdminLoginActionResult = {
 	success: boolean;
 	message?: string;

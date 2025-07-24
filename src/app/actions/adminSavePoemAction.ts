@@ -2,8 +2,7 @@
 
 import { ObjectId } from "mongodb";
 import sharp from "sharp";
-
-import clientPromise from "@/lib/mongodb";
+import getClientPromise from "@/lib/mongodb";
 import { uploadImageToR2 } from "@/lib/r2";
 import {
 	PostCreationSchema,
@@ -92,7 +91,7 @@ export async function adminSavePoemAction(
 			preview_text: previewText,
 		};
 
-		const client = await clientPromise;
+		const client = await getClientPromise();
 		const db = client.db(process.env.MONGO_DB_NAME);
 		const postCollection = db.collection<PostInsert>("posts");
 
@@ -164,7 +163,7 @@ export async function adminPatchPoemAction(
 			updatePayload.image_url = fileNameAfterUpload;
 		}
 
-		const client = await clientPromise;
+		const client = await getClientPromise();
 		const db = client.db(process.env.MONGO_DB_NAME);
 		const postCollection = db.collection<PostInsert>("posts");
 

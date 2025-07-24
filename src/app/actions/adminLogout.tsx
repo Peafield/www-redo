@@ -1,3 +1,5 @@
+"use server";
+
 export default async function adminLogout() {
 	try {
 		await fetch("/api/auth/logout", {
