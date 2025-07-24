@@ -3,6 +3,7 @@ import { z } from "zod";
 
 export const env = createEnv({
 	server: {
+		NODE_ENV: z.enum(["development", "production"]).default("development"),
 		MONGODB_URI: z.string().url(),
 		MONGO_DB_NAME: z.string().min(1),
 		R2_ACCOUNT_ID: z.string().min(1),
@@ -16,9 +17,6 @@ export const env = createEnv({
 	},
 	client: {
 		NEXT_PUBLIC_APP_URL: z.string().url(),
-	},
-	shared: {
-		NODE_ENV: z.enum(["development", "production"]).default("development"),
 	},
 	runtimeEnv: {
 		NODE_ENV: process.env.NODE_ENV,
@@ -34,4 +32,5 @@ export const env = createEnv({
 		ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
 		ADMIN_USERNAME: process.env.ADMIN_USERNAME,
 	},
+	emptyStringAsUndefined: true,
 });
