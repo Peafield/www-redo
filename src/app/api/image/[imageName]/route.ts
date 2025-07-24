@@ -1,6 +1,8 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { getImageFromR2 } from "@/lib/r2";
 
+export const dynamic = "force-dynamic";
+
 type Context = {
 	params: Promise<{
 		imageName: string;
