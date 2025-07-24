@@ -8,7 +8,7 @@ export default function PoemEditorImage({ imageSrc }: PoemEditorImageProps) {
 	if (!imageSrc) return null;
 	let imageURL = "";
 	if (typeof imageSrc === "string") {
-		imageURL = `/api/image/${encodeURIComponent(imageSrc)}`;
+		imageURL = `${process.env.NEXT_PUBLIC_APP_URL}/api/image/${encodeURIComponent(imageSrc)}`;
 	}
 
 	if (imageSrc instanceof Blob) {

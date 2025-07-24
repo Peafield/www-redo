@@ -8,7 +8,7 @@ type ArchivePoemCardProps = {
 };
 
 export default function ArchivePoemCard({ post }: ArchivePoemCardProps) {
-	const imageUrl = `/api/image/${encodeURIComponent(post.image_url)}`;
+	const imageUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/image/${encodeURIComponent(post.image_url)}`;
 	return (
 		<Link
 			href={`/poem/${post._id as string}`}

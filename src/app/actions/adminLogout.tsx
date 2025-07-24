@@ -2,7 +2,7 @@
 
 export default async function adminLogout() {
 	try {
-		await fetch("/api/auth/logout", {
+		await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/auth/logout`, {
 			method: "GET",
 		});
 	} catch (error) {

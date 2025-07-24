@@ -15,7 +15,7 @@ export default function HomeLatest({
 	src,
 	preview,
 }: HomeLatestProps) {
-	const imageUrl = `/api/image/${encodeURIComponent(src)}`;
+	const imageUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/image/${encodeURIComponent(src)}`;
 	return (
 		<section className="group w-full h-full flex flex-col">
 			<Subheading text={"Lastest Poem"} className="sm:text-center" />

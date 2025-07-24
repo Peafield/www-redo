@@ -13,13 +13,16 @@ export default async function adminLogin(
 	const username = formData.get("username");
 	const password = formData.get("password");
 	try {
-		const response = await fetch("/api/auth/login", {
-			method: "POST",
-			body: JSON.stringify({ username, password }),
-			headers: {
-				"Content-Type": "application/json",
+		const response = await fetch(
+			`${process.env.NEXT_PUBLIC_APP_URL}/api/auth/login`,
+			{
+				method: "POST",
+				body: JSON.stringify({ username, password }),
+				headers: {
+					"Content-Type": "application/json",
+				},
 			},
-		});
+		);
 
 		if (!response.ok) {
 			return { success: false, message: "Invalid username or password" };
