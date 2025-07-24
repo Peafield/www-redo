@@ -78,7 +78,7 @@ export default function Login() {
 									className="w-full inline-flex justify-center items-center "
 								/>
 							</div>
-							{loginState?.error && (
+							{!loginState?.success && (
 								<p className="font-serif font-bold text-sm text-classy-mauve">
 									Invalid username or password
 								</p>

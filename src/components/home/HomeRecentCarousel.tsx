@@ -25,7 +25,7 @@ export function HomeRecentCarousel({
     sm:[&::-webkit-scrollbar-thumb]:rounded-full"
 			>
 				{recentPostsData?.map((post) => {
-					const imageUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/image/${encodeURIComponent(post.image_url)}`;
+					const imageUrl = `/api/image/${encodeURIComponent(post.image_url)}`;
 					return (
 						<Link
 							href={`/poem/${post._id as string}`}

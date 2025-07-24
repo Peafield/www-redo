@@ -6,7 +6,7 @@ type PoemImageProps = {
 };
 
 export default function PoemImage({ imageUrl, title }: PoemImageProps) {
-	const src = `${process.env.NEXT_PUBLIC_APP_URL}/api/image/${encodeURIComponent(imageUrl)}`;
+	const src = `/api/image/${encodeURIComponent(imageUrl)}`;
 	return (
 		<div className="relative w-full aspect-3/2 drop-shadow-2xl rounded-2xl">
 			<Image
