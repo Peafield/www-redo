@@ -33,7 +33,7 @@ export default function PoemComment({
 			<button
 				type="button"
 				onClick={onReplyClick}
-				className="text-sm text-left text-shady-character/75 font-serif cursor-pointer hover:text-classy-mauve"
+				className="text-sm text-left text-shady-character/80 font-serif cursor-pointer hover:text-classy-mauve"
 			>
 				Reply
 			</button>
